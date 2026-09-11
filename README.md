@@ -134,14 +134,18 @@ Breakpoints do real layout work here, not just reflow:
 |---|---|---|
 | Hero | Stacked, centred; compact buttons on one row | Split — copy left, die right |
 | Hero die | 220–260px, sized off viewport width | 260–340px, sized off height |
-| Architecture | Tall single-column layout, fixed 128px nodes, wrapping labels | Wide left-to-right layout |
+| Architecture | Tall vertical layout below `lg` (phones *and* tablets), fixed 144px nodes, fit allowed to scale up to 1.35× | Wide left-to-right layout |
 | Skills, projects, impact | One column | Two to four |
 
 The architecture diagrams carry **two hand-placed layouts** rather than one graph
 scaled down. Fitting the wide layout into a phone drove React Flow's zoom to
-0.56, rendering 13px node labels at 7px. Nodes also take a fixed width on
-phones: with `min-width` a long caption could widen a node, which made the
-graph's real footprint unpredictable and let `fitView` race the measurement.
+0.56, rendering 13px node labels at 7px; at tablet width it still hit 0.63. The
+vertical layout therefore applies all the way up to `lg`. With zoom locked,
+`fitView` is the only thing sizing the diagram, so the box's proportions decide
+how large nodes render — the narrow boxes are tall on purpose so the fit can
+scale *up*. Nodes take a fixed 144px there: the widest single word
+("Reconciliation") needs 82px, and `min-width` had let long captions widen nodes
+unpredictably and race the measurement.
 
 ## Metadata
 

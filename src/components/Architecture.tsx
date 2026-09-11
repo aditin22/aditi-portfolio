@@ -57,19 +57,19 @@ const DIAGRAMS = {
       'A Windows Service reads 26 TallyPrime entities over local IPC, stages them in SQLite, and delta-syncs to the cloud. Every write-back is idempotent, so a retry after a network drop can never post the same financial entry twice.',
     nodes: [
       { id: 'tally', label: 'TallyPrime', sub: 'on-premise ERP', icon: 'Building2', accent: 'cloud',
-        wide: [0, 120], wideHandles: ['right'], narrow: [20, 0], narrowHandles: ['bottom'] },
+        wide: [0, 120], wideHandles: ['right'], narrow: [0, 0], narrowHandles: ['bottom'] },
       { id: 'auth', label: 'OAuth 2.0', sub: 'client credentials', icon: 'ShieldCheck', accent: 'react',
-        wide: [250, -10], wideHandles: ['bottom'], narrow: [138, 92], narrowHandles: ['left'] },
+        wide: [250, -10], wideHandles: ['bottom'], narrow: [158, 92], narrowHandles: ['left'] },
       { id: 'svc', label: 'Windows Service', sub: '.NET 10 / C#', icon: 'Cpu', accent: 'dotnet',
-        wide: [250, 120], wideHandles: ['left', 'right', 'bottom', 'top'], narrow: [20, 92], narrowHandles: ['top', 'right', 'bottom'] },
+        wide: [250, 120], wideHandles: ['left', 'right', 'bottom', 'top'], narrow: [0, 92], narrowHandles: ['top', 'right', 'bottom'] },
       { id: 'sqlite', label: 'SQLite Stage', sub: 'delta queue', icon: 'Database', accent: 'data',
-        wide: [250, 260], wideHandles: ['top', 'right'], narrow: [20, 200], narrowHandles: ['top', 'bottom'] },
+        wide: [250, 260], wideHandles: ['top', 'right'], narrow: [0, 200], narrowHandles: ['top', 'bottom'] },
       { id: 'recon', label: 'Reconciliation', sub: 'no duplicate posts', icon: 'CheckCheck', accent: 'dotnet',
-        wide: [540, 280], wideHandles: ['left', 'top'], narrow: [20, 308], narrowHandles: ['top', 'bottom'] },
+        wide: [540, 280], wideHandles: ['left', 'top'], narrow: [0, 308], narrowHandles: ['top', 'bottom'] },
       { id: 'pg', label: 'PostgreSQL', sub: 'cloud workflows', icon: 'Server', accent: 'data',
-        wide: [540, 160], wideHandles: ['left', 'right'], narrow: [20, 416], narrowHandles: ['top', 'right', 'bottom'] },
+        wide: [540, 160], wideHandles: ['left', 'right'], narrow: [0, 416], narrowHandles: ['top', 'right', 'bottom'] },
       { id: 's3', label: 'AWS S3', sub: 'document store', icon: 'Cloud', accent: 'cloud',
-        wide: [540, 40], wideHandles: ['left'], narrow: [20, 524], narrowHandles: ['top'] },
+        wide: [540, 40], wideHandles: ['left'], narrow: [0, 524], narrowHandles: ['top'] },
     ] satisfies NodeSpec[],
     edges: [
       { id: 'e1', source: 'tally', target: 'svc', label: 'IPC', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
@@ -89,21 +89,21 @@ const DIAGRAMS = {
       { id: 'b2c', label: 'B2C', sub: 'consumer app', icon: 'Users', accent: 'react',
         wide: [0, 0], wideHandles: ['right'], narrow: [0, 0], narrowHandles: ['bottom'] },
       { id: 'b2b', label: 'B2B', sub: '100+ services', icon: 'Briefcase', accent: 'react',
-        wide: [0, 90], wideHandles: ['right'], narrow: [138, 0], narrowHandles: ['bottom'] },
+        wide: [0, 90], wideHandles: ['right'], narrow: [158, 0], narrowHandles: ['bottom'] },
       { id: 'legal', label: 'Legal', sub: 'booking & chat', icon: 'Scale', accent: 'react',
         wide: [0, 180], wideHandles: ['right'], narrow: [0, 74], narrowHandles: ['bottom'] },
       { id: 'admin', label: 'Admin', sub: 'operations', icon: 'Settings', accent: 'react',
-        wide: [0, 270], wideHandles: ['right'], narrow: [138, 74], narrowHandles: ['bottom'] },
+        wide: [0, 270], wideHandles: ['right'], narrow: [158, 74], narrowHandles: ['bottom'] },
       { id: 'ds', label: 'Design System', sub: 'Radix + Tailwind', icon: 'Component', accent: 'react',
-        wide: [265, 135], wideHandles: ['left', 'right', 'bottom'], narrow: [69, 164], narrowHandles: ['top', 'bottom'] },
+        wide: [265, 135], wideHandles: ['left', 'right', 'bottom'], narrow: [79, 164], narrowHandles: ['top', 'bottom'] },
       { id: 'auth', label: 'Auth Core', sub: 'OAuth 2.0 · JWT', icon: 'KeyRound', accent: 'dotnet',
         wide: [530, 20], wideHandles: ['left', 'right'], narrow: [0, 258], narrowHandles: ['top', 'bottom'] },
       { id: 'rbac', label: 'Multi-org RBAC', sub: 'scoped access', icon: 'ShieldCheck', accent: 'dotnet',
-        wide: [530, 135], wideHandles: ['left', 'right'], narrow: [138, 258], narrowHandles: ['top', 'bottom'] },
+        wide: [530, 135], wideHandles: ['left', 'right'], narrow: [158, 258], narrowHandles: ['top', 'bottom'] },
       { id: 'pay', label: 'Razorpay', sub: 'polled verification', icon: 'CreditCard', accent: 'cloud',
-        wide: [530, 250], wideHandles: ['left', 'right'], narrow: [69, 348], narrowHandles: ['top', 'bottom'] },
+        wide: [530, 250], wideHandles: ['left', 'right'], narrow: [79, 348], narrowHandles: ['top', 'bottom'] },
       { id: 'api', label: 'REST APIs', sub: 'PostgreSQL', icon: 'Database', accent: 'data',
-        wide: [790, 135], wideHandles: ['left'], narrow: [69, 438], narrowHandles: ['top'] },
+        wide: [790, 135], wideHandles: ['left'], narrow: [79, 438], narrowHandles: ['top'] },
     ] satisfies NodeSpec[],
     edges: [
       { id: 'f1', source: 'b2c', target: 'ds', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
@@ -122,13 +122,17 @@ const DIAGRAMS = {
 
 type Key = DiagramKey
 
-/** True below the `md` breakpoint, kept in sync with the CSS. */
+/**
+ * True below the `lg` breakpoint, kept in sync with ArchNode's classes.
+ * Tablets take the vertical layout too: squeezing the wide graph into 768px
+ * drove FylFlix to 0.63 zoom with 10px labels.
+ */
 function useNarrow() {
   const [narrow, setNarrow] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches,
   )
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
+    const mq = window.matchMedia('(max-width: 1023px)')
     const on = (e: MediaQueryListEvent) => setNarrow(e.matches)
     mq.addEventListener('change', on)
     return () => mq.removeEventListener('change', on)
@@ -213,18 +217,20 @@ export function Architecture() {
       </Reveal>
 
       <Reveal delay={0.08}>
-        {/* Taller on phones: the narrow layout is a tall column, and the extra
-            height is what lets it fit near 1:1 instead of being zoomed to 0.56. */}
-        <div className="h-[600px] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card md:h-[500px]">
+        {/* Narrow screens get a tall box: the vertical layout is a column, and
+            with zoom locked, fitView is the only thing that sizes the diagram —
+            so the box's proportions decide how large the nodes render. The
+            heights below let it scale *up* past 1:1 rather than stay compact. */}
+        <div className="h-[640px] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card sm:h-[760px] lg:h-[500px]">
           <ReactFlow
             key={`${key}-${narrow ? 'n' : 'w'}`}
             nodes={nodes}
             edges={edges}
             nodeTypes={nodeTypes}
             fitView
-            fitViewOptions={{ padding: narrow ? 0.03 : 0.18 }}
+            fitViewOptions={{ padding: narrow ? 0.04 : 0.18 }}
             minZoom={0.4}
-            maxZoom={1.6}
+            maxZoom={1.35}
             /* The diagram is fitted on mount; a visitor can drag nodes and pan,
                but not zoom — wheel, pinch and double-click all stay inert so
                scrolling past the section never hijacks the page. */
