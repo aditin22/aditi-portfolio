@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { useInView, useReducedMotion } from 'framer-motion'
 
 /* ── Face miniatures ───────────────────────────────────────────────────────
    Each face is a small, flat mockup of something in the resume. They are
@@ -245,10 +245,28 @@ const FACES = [
 const Y_STEP = [0, -90, -180, -270, -360, -360]
 const X_STEP = [0, 0, 0, 0, -90, -270]
 
+/**
+ * Timing. The die opens with a quick tour — four rolls in about three seconds,
+ * across both axes — so a visitor sees it turn before they've decided it's a
+ * flat card. After that it settles into the slow cadence. A manual pick ends
+ * the tour early and restarts the cruise timer.
+ */
+const INTRO_STEPS = 4
+const INTRO_MS = 800
+const CRUISE_MS = 3600
+const ROLL_INTRO_MS = 550
 const ROLL_MS = 1050
+const START_DELAY_MS = 700
 
 export function HeroCube() {
   const reduced = useReducedMotion()
+  const stageRef = useRef<HTMLDivElement>(null)
+  // Fire the tour when the die is actually on screen — on phones it sits
+  // below the fold, and a tour nobody sees is wasted.
+  const inView = useInView(stageRef, { once: true, margin: '0px 0px -15% 0px' })
+
+  const [started, setStarted] = useState(false)
+  const [manual, setManual] = useState(false)
   const [step, setStep] = useState(0)
   // Bumped on every manual pick so the auto-advance timer restarts. Without
   // this the interval keeps its original phase and a face chosen just before
@@ -258,20 +276,38 @@ export function HeroCube() {
   // reads as a bug, so it only catches up once the die has settled.
   const [settled, setSettled] = useState(0)
 
+  // The pace switches when the tour's last roll is *scheduled*; the duration
+  // switches one step later so that roll still plays at tour speed.
+  const intro = started && !manual && step < INTRO_STEPS
+  const rollMs = started && !manual && step <= INTRO_STEPS ? ROLL_INTRO_MS : ROLL_MS
+
+  // Above the fold on landing is the common case, so check that directly once
+  // the ref is attached rather than waiting on the observer; the observer
+  // covers the die scrolling into view later (phones stack it below the copy).
   useEffect(() => {
     if (reduced) return
-    const id = setInterval(() => setStep((n) => n + 1), 3600)
+    const el = stageRef.current
+    const r = el?.getBoundingClientRect()
+    const visibleNow = !!r && r.top < window.innerHeight && r.bottom > 0
+    if (!inView && !visibleNow) return
+    const id = setTimeout(() => setStarted(true), START_DELAY_MS)
+    return () => clearTimeout(id)
+  }, [inView, reduced])
+
+  useEffect(() => {
+    if (reduced || !started) return
+    const id = setInterval(() => setStep((n) => n + 1), intro ? INTRO_MS : CRUISE_MS)
     return () => clearInterval(id)
-  }, [reduced, nudge])
+  }, [reduced, started, intro, nudge])
 
   useEffect(() => {
     if (reduced) {
       setSettled(step)
       return
     }
-    const id = setTimeout(() => setSettled(step), ROLL_MS)
+    const id = setTimeout(() => setSettled(step), rollMs)
     return () => clearTimeout(id)
-  }, [step, reduced])
+  }, [step, reduced, rollMs])
 
   const cycle = Math.floor(step / 6)
   const pos = step % 6
@@ -281,8 +317,14 @@ export function HeroCube() {
 
   return (
     <div className="relative flex flex-col items-center">
-      <div className="cube-stage">
-        <div className="cube" style={{ transform: `rotateX(${x}deg) rotateY(${y}deg)` }}>
+      <div className="cube-stage" ref={stageRef}>
+        <div
+          className="cube"
+          style={{
+            transform: `rotateX(${x}deg) rotateY(${y}deg)`,
+            transitionDuration: `${rollMs}ms`,
+          }}
+        >
           {FACES.map((f) => (
             <div key={f.cls} className={`cube-face ${f.cls}`}>
               <div className="cube-face-in">{f.node}</div>
@@ -311,6 +353,7 @@ export function HeroCube() {
                 // Always roll forward to the requested face; picking the
                 // current one takes the long way round rather than doing nothing.
                 setStep((n) => n + ((i - (n % 6) + 6) % 6 || 6))
+                setManual(true)
                 setNudge((v) => v + 1)
               }}
               className="h-1.5 rounded-full transition-all"

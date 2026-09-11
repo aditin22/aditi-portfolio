@@ -98,6 +98,12 @@ flips.
   would strand content at `opacity: 0` permanently, so both are handled
   explicitly.
 
+- **`HeroCube` opens with a quick tour.** Four rolls at 550ms, across both
+  axes, starting 0.7s after the die is on screen — so a visitor sees it turn
+  before deciding it's a flat card. It then settles to one roll every 3.6s. The
+  pace switches when the tour's last roll is scheduled, but the duration one
+  step later, so that roll still plays at tour speed.
+
 - **`HeroCube` rolls by rotating the container, never the faces.** Faces stay at
   fixed positions on the die; the step table accumulates -360° per axis every six
   steps so it always turns the same way instead of snapping back. The caption
