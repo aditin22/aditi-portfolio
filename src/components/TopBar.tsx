@@ -6,11 +6,11 @@ import { ThemeToggle } from './ThemeToggle'
 
 const LINKS = [
   { href: '#work', label: 'Work' },
-  { href: '#impact', label: 'Impact' },
-  { href: '#projects', label: 'Projects' },
+  { href: '#experience', label: 'Experience' },
   { href: '#architecture', label: 'Architecture' },
   { href: '#skills', label: 'Skills' },
   { href: '#about', label: 'About' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 export function TopBar() {

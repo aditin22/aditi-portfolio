@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   Background,
   BackgroundVariant,
-  Controls,
   MarkerType,
   ReactFlow,
   type Edge,
@@ -12,6 +11,7 @@ import '@xyflow/react/dist/style.css'
 import { ArchNode } from './ArchNode'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
+import { useDiagram, type DiagramKey } from '../store/diagram'
 import { useTheme } from '../store/theme'
 
 const nodeTypes = { arch: ArchNode }
@@ -120,7 +120,7 @@ const DIAGRAMS = {
   },
 } as const
 
-type Key = keyof typeof DIAGRAMS
+type Key = DiagramKey
 
 /** True below the `md` breakpoint, kept in sync with the CSS. */
 function useNarrow() {
@@ -137,7 +137,8 @@ function useNarrow() {
 }
 
 export function Architecture() {
-  const [key, setKey] = useState<Key>('tally')
+  const key = useDiagram((s) => s.key)
+  const setKey = useDiagram((s) => s.open)
   const theme = useTheme((s) => s.theme)
   const narrow = useNarrow()
   const d = DIAGRAMS[key]
@@ -190,7 +191,7 @@ export function Architecture() {
         eyebrow="System design"
         title="The diagrams behind"
         accent="the bullet points."
-        blurb="Drag a node, pan the canvas, zoom in. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
+        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
       />
 
       <Reveal>
@@ -224,13 +225,19 @@ export function Architecture() {
             fitViewOptions={{ padding: narrow ? 0.03 : 0.18 }}
             minZoom={0.4}
             maxZoom={1.6}
+            /* The diagram is fitted on mount; a visitor can drag nodes and pan,
+               but not zoom — wheel, pinch and double-click all stay inert so
+               scrolling past the section never hijacks the page. */
+            zoomOnScroll={false}
+            zoomOnPinch={false}
+            zoomOnDoubleClick={false}
+            preventScrolling={false}
             proOptions={{ hideAttribution: true }}
             nodesConnectable={false}
             edgesFocusable={false}
             colorMode={theme}
           >
             <Background variant={BackgroundVariant.Dots} gap={22} size={1} color="var(--border-mid)" />
-            <Controls showInteractive={false} position="bottom-right" />
           </ReactFlow>
         </div>
         <p className="mt-4 max-w-3xl text-[14px] leading-relaxed text-ink-2">{d.caption}</p>

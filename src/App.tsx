@@ -7,7 +7,8 @@ import { Hero } from './components/Hero'
 import { Impact } from './components/Impact'
 import { Band } from './components/Band'
 import { Stats } from './components/Stats'
-import { Projects } from './components/Projects'
+import { FeaturedWork } from './components/FeaturedWork'
+import { WhatIBuild } from './components/WhatIBuild'
 import { Skills } from './components/Skills'
 import { TopBar } from './components/TopBar'
 
@@ -23,7 +24,7 @@ function ArchitectureFallback() {
         eyebrow="System design"
         title="The diagrams behind"
         accent="the bullet points."
-        blurb="Drag a node, pan the canvas, zoom in. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
+        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
       />
       <div className="h-[440px] w-full animate-pulse rounded-2xl border border-line bg-surface md:h-[500px]" />
     </section>
@@ -43,10 +44,11 @@ export default function App() {
       <main>
         <Hero />
         <Stats />
+        <WhatIBuild />
+        <FeaturedWork />
         <Experience />
         <Impact />
         <Band />
-        <Projects />
         <Suspense fallback={<ArchitectureFallback />}>
           <Architecture />
         </Suspense>

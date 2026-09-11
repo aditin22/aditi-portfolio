@@ -2,8 +2,13 @@ export type Accent = 'react' | 'dotnet' | 'data' | 'cloud'
 
 export const profile = {
   name: 'Aditi Navhal',
-  role: 'Software Engineer',
-  tagline: ['C# / .NET Core', 'React / TypeScript', 'SQL', 'REST APIs'],
+  role: 'Full-Stack Software Engineer',
+  tagline: ['C# / .NET', 'React', 'Next.js', 'TypeScript', 'SQL'],
+  positioning:
+    'Building scalable fintech and enterprise applications across frontend, backend, APIs, payments, authentication and data systems.',
+  years: 3,
+  /** Served from public/; resolved against the Vite base at render time. */
+  resumeFile: 'Aditi_Navhal_Resume.pdf',
   location: 'Delhi NCR, India',
   email: 'aditinavhal01@gmail.com',
   phone: '+91-8769589069',
@@ -14,10 +19,12 @@ export const profile = {
 }
 
 export const stats = [
-  { value: 3, suffix: '+', label: 'Years shipping production software' },
-  { value: 100, suffix: '+', label: 'B2B services delivered on FylFlix' },
-  { value: 30, suffix: '%', label: 'Performance gain on RECON modernization' },
-  { value: 26, suffix: '', label: 'TallyPrime entities synced to cloud' },
+  { value: 3, suffix: '', label: 'Years professional engineering' },
+  { value: 4, suffix: '', label: 'Product surfaces owned' },
+  { value: 100, suffix: '+', label: 'B2B services supported' },
+  { value: 26, suffix: '', label: 'Entities synchronized' },
+  { value: 100, suffix: '+', label: 'Financial reports automated' },
+  { value: 10, suffix: '+', label: 'Production releases' },
 ]
 
 export type Role = {
@@ -27,6 +34,10 @@ export type Role = {
   location: string
   period: string
   current: boolean
+  /** Two lines, not the resume bullets. */
+  summary: string
+  /** Case-study ids this role links to. */
+  caseStudies: string[]
   projects: {
     name: string
     subtitle: string
@@ -43,6 +54,9 @@ export const experience: Role[] = [
     location: 'Delhi NCR, India',
     period: 'Jan 2026 — Present',
     current: true,
+    summary:
+      'Own four FylFlix product surfaces end to end — shared design system, auth and RBAC, payments — and built the .NET service that syncs on-premise Tally data to the cloud.',
+    caseStudies: ['fylflix', 'tally'],
     projects: [
       {
         name: 'FylFlix Platform',
@@ -87,6 +101,9 @@ export const experience: Role[] = [
     location: 'Mumbai, Maharashtra',
     period: 'Jul 2023 — Jan 2026',
     current: false,
+    summary:
+      'Modernized a live hedge-fund reconciliation platform from .NET Framework to .NET Core + React, and automated 100+ financial reports for PwC, Carronade and Aurelius.',
+    caseStudies: ['recon'],
     projects: [
       {
         name: 'RECON',
@@ -122,82 +139,206 @@ export const experience: Role[] = [
   },
 ]
 
-export type Project = {
+export const whatIBuild: { icon: string; title: string; body: string; accent: Accent }[] = [
+  {
+    icon: 'Layers',
+    accent: 'react',
+    title: 'Full-stack products',
+    body: 'React and Next.js frontends backed by scalable .NET APIs and relational databases.',
+  },
+  {
+    icon: 'Landmark',
+    accent: 'data',
+    title: 'Financial systems',
+    body: 'Payments, reconciliation, reporting, synchronization and data-intensive workflows.',
+  },
+  {
+    icon: 'ShieldCheck',
+    accent: 'dotnet',
+    title: 'Secure platforms',
+    body: 'OAuth 2.0, JWT, RBAC, multi-organization permissions and secure integrations.',
+  },
+]
+
+export type CaseStudy = {
   id: string
+  index: string
   name: string
-  subtitle: string
+  kicker: string
   org: string
   period: string
   accent: Accent
-  blurb: string
-  highlights: { label: string; value: string }[]
   stack: string[]
+  problem: string
+  owned: string[]
+  /** Horizontal step chains — the architecture the audit asked to see. */
+  flows: { title: string; steps: string[] }[]
+  challenges: { title: string; body: string }[]
+  impact: { value: string; label: string }[]
+  /** Which interactive diagram in the Architecture section to open. */
+  diagram?: 'tally' | 'fylflix'
 }
 
-export const projects: Project[] = [
+export const caseStudies: CaseStudy[] = [
   {
     id: 'fylflix',
+    index: '01',
     name: 'FylFlix Platform',
-    subtitle: 'B2C · B2B · Legal · Admin',
+    kicker: 'Production fintech & compliance platform',
     org: 'WFYI Technology',
-    period: '2026 — Present',
+    period: 'Jan 2026 — Present',
     accent: 'react',
-    blurb:
-      'Four product surfaces on one shared design system. Search and discovery, analytics dashboards, document workflows, calendar, and multi-organization RBAC — plus Razorpay subscriptions with idempotent activation and GST invoicing.',
-    highlights: [
-      { label: 'Services live', value: '100+' },
-      { label: 'Product surfaces', value: '4' },
-      { label: 'Payments', value: 'Razorpay' },
+    stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'OAuth 2.0', 'JWT', 'Razorpay'],
+    problem:
+      'Customer and internal workflows had to run across four surfaces — B2C, B2B, Legal and Admin — on one auth core and one design system, with organization boundaries enforced everywhere.',
+    owned: [
+      'Four frontend applications',
+      'Shared UI / design system',
+      'Authentication & workspaces',
+      'Multi-organization RBAC',
+      'B2B discovery · 100+ services',
+      'Payments & subscriptions',
+      'Legal booking & messaging',
+      'Document workflows',
+      'Analytics dashboards',
     ],
-    stack: ['React', 'Next.js', 'TypeScript', 'Radix UI', 'Tailwind CSS', 'OAuth 2.0', 'JWT'],
+    flows: [
+      {
+        title: 'Authentication',
+        steps: ['Google OAuth', 'Secure callback', 'JWT', 'Refresh token', 'Workspace', 'RBAC'],
+      },
+      {
+        title: 'Payments',
+        steps: ['Checkout', 'Razorpay', 'Polling', 'Server verification', 'Idempotent activation', 'GST invoice'],
+      },
+    ],
+    challenges: [
+      {
+        title: 'One auth core, four surfaces',
+        body: 'A single OAuth 2.0 / JWT flow with secure callbacks and refresh-token handling, shared by every product instead of re-implemented per app.',
+      },
+      {
+        title: 'Trust the server, not the client',
+        body: 'Payment state is polled and verified server-side before anything activates, and activation is idempotent — a retried callback can never double-activate a plan.',
+      },
+      {
+        title: 'Organization boundaries',
+        body: 'Multi-org RBAC is enforced before a query is issued, so no surface can reach across a tenant by accident.',
+      },
+    ],
+    impact: [
+      { value: '4', label: 'Product surfaces' },
+      { value: '100+', label: 'B2B services' },
+      { value: '1', label: 'Shared design system' },
+      { value: 'Live', label: 'Razorpay subscriptions' },
+    ],
+    diagram: 'fylflix',
   },
   {
     id: 'tally',
+    index: '02',
     name: 'Tally Connector',
-    subtitle: 'Offline-to-Cloud Synchronization',
+    kicker: 'Offline-to-cloud synchronization engine',
     org: 'WFYI Technology',
     period: '2026',
     accent: 'dotnet',
-    blurb:
-      'A .NET 10 Windows Service that keeps 26 TallyPrime entities in step with the cloud. Durable delta-sync, idempotent write-back and reconciliation safeguards mean a retry can never post a financial entry twice.',
-    highlights: [
-      { label: 'Entities synced', value: '26' },
-      { label: 'Duplicate postings', value: 'Zero' },
-      { label: 'Runtime', value: '.NET 10' },
+    stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'OAuth 2.0', 'xUnit', 'Serilog'],
+    problem:
+      'On-premise TallyPrime data had to reach cloud workflows reliably — 26 entity types, over connectivity that drops, without ever posting a financial entry twice.',
+    owned: [
+      '.NET 10 Windows Service',
+      'SQLite-backed local processing',
+      'Delta synchronization',
+      'Idempotent write-back',
+      'OAuth 2.0 client credentials',
+      'Encrypted secrets & secure IPC',
+      'Structured logging',
+      'Automated xUnit suite',
     ],
-    stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'xUnit', 'Serilog'],
+    flows: [
+      {
+        title: 'Data path',
+        steps: ['TallyPrime', 'Windows Service', 'SQLite stage', 'Delta sync', 'AWS S3 · Cloud APIs', 'PostgreSQL'],
+      },
+    ],
+    challenges: [
+      {
+        title: 'Offline connectivity',
+        body: 'Work is staged locally in SQLite, so the service keeps processing when the network disappears and drains the queue when it returns.',
+      },
+      {
+        title: 'Duplicate prevention',
+        body: 'Every write-back is idempotent and guarded by reconciliation checks, so a retry after a failure cannot post the same entry twice.',
+      },
+      {
+        title: 'Incremental sync',
+        body: 'Delta sync ships only what changed across the 26 entities instead of re-sending everything on each run.',
+      },
+      {
+        title: 'Security',
+        body: 'OAuth 2.0 client credentials, encrypted secrets and secure IPC between the service and its host.',
+      },
+      {
+        title: 'Reliability',
+        body: 'Serilog structured logging around every sync path, with xUnit tests covering the delta and write-back logic.',
+      },
+    ],
+    impact: [
+      { value: '26', label: 'Entities synchronized' },
+      { value: '0', label: 'Duplicate postings' },
+      { value: '.NET 10', label: 'Windows Service' },
+    ],
+    diagram: 'tally',
   },
   {
     id: 'recon',
+    index: '03',
     name: 'RECON',
-    subtitle: 'Hedge Fund Reconciliation Platform',
+    kicker: 'Enterprise hedge-fund reconciliation platform',
     org: 'Indus Valley Partners',
-    period: '2023 — 2026',
+    period: 'Jul 2023 — Jan 2026',
     accent: 'data',
-    blurb:
-      'Modernized a legacy .NET Framework financial platform to .NET Core + React, end to end — SQL schema design, REST APIs, and a reusable React component layer that carried 10+ production feature releases.',
-    highlights: [
-      { label: 'Performance', value: '+30%' },
-      { label: 'Release cycles', value: '25% faster' },
-      { label: 'Feature releases', value: '10+' },
+    stack: ['.NET Core', 'REST APIs', 'React', 'SQL Server', 'Database design', 'SSRS', 'SSIS'],
+    problem:
+      'A legacy .NET Framework reconciliation platform that hedge funds close their books on had to be modernized — without disrupting the clients running on it.',
+    owned: [
+      '.NET Framework → .NET Core migration',
+      'REST API layer',
+      'React component library',
+      'SQL schema & database design',
+      'Reconciliation workflows',
+      'Peer reviews & mentoring',
     ],
-    stack: ['.NET Core', 'React', 'SQL Server', 'REST APIs', 'Database Design'],
-  },
-  {
-    id: 'clients',
-    name: 'Client Engagements',
-    subtitle: 'PwC · Carronade Capital · Aurelius Capital',
-    org: 'Indus Valley Partners',
-    period: '2023 — 2026',
-    accent: 'cloud',
-    blurb:
-      'Automated 100+ SSRS financial and compliance reports — Taxlot, Gain & Loss, Security Master, liquidity, counterparty and portfolio — and tuned the SQL/SSIS ETL pipelines feeding them.',
-    highlights: [
-      { label: 'Reports automated', value: '100+' },
-      { label: 'Pipeline runtime', value: '6h → 2h' },
-      { label: 'Clients', value: '3' },
+    flows: [
+      {
+        title: 'Modernization',
+        steps: ['.NET Framework', 'Legacy UI', '→', '.NET Core', 'REST APIs', 'React', 'Reusable components'],
+      },
     ],
-    stack: ['SSRS', 'SSIS', 'SQL', 'ETL', 'Reporting'],
+    challenges: [
+      {
+        title: 'Modernize in place',
+        body: 'Moved a live financial application to .NET Core + React while it stayed in production for clients.',
+      },
+      {
+        title: 'End to end',
+        body: 'Owned modules from SQL design through .NET Core REST APIs to reusable React components — 10+ production feature releases.',
+      },
+      {
+        title: 'Reporting accuracy',
+        body: 'Validation, data-processing and workflow enhancements that improved reconciliation reporting for hedge-fund operations.',
+      },
+      {
+        title: 'Client reporting, alongside',
+        body: '100+ SSRS financial and compliance reports for PwC, Carronade Capital and Aurelius — Taxlot, Gain & Loss, Security Master, liquidity, counterparty, portfolio — with SQL/SSIS ETL cut from ~6 hours to 2.',
+      },
+    ],
+    impact: [
+      { value: '+30%', label: 'Performance' },
+      { value: '25%', label: 'Faster release cycles' },
+      { value: '10+', label: 'Production releases' },
+      { value: '100+', label: 'Reports automated' },
+    ],
   },
 ]
 

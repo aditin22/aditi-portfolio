@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import { profile } from '../data/resume'
 import { Reveal } from './Reveal'
 
@@ -25,8 +25,7 @@ export function Contact() {
 
         <Reveal delay={0.06}>
           <h2 className="t-display mx-auto max-w-[760px] text-white">
-            Have something that needs to be{' '}
-            <span style={{ color: '#cfeeff' }}>built properly?</span>
+            Let's build <span style={{ color: '#cfeeff' }}>something.</span>
           </h2>
         </Reveal>
 
@@ -35,25 +34,30 @@ export function Contact() {
             className="mx-auto mt-4 max-w-[560px] text-[17px] leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.9)' }}
           >
-            I'm open to Software Engineer roles across .NET and React. Email is the fastest way
-            to reach me — I answer everything.
+            I'm interested in <strong className="font-semibold text-white">Software Engineer / Full-Stack Engineer</strong>{' '}
+            roles involving .NET, React and scalable product development. Email is the fastest way
+            to reach me.
           </p>
         </Reveal>
 
         <Reveal delay={0.18}>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href={`mailto:${profile.email}`} className="btn-white">
-              {profile.email}
-              <ArrowUpRight size={17} />
+            <a href={`mailto:${profile.email}`} className="btn-white btn-compact">
+              <Mail size={16} />
+              Email me
+              <ArrowUpRight size={15} />
             </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="btn-glass"
-            >
-              <Linkedin size={17} />
+            <a href={profile.linkedin} target="_blank" rel="noreferrer noopener" className="btn-glass btn-compact">
+              <Linkedin size={16} />
               LinkedIn
+            </a>
+            <a href={profile.github} target="_blank" rel="noreferrer noopener" className="btn-glass btn-compact">
+              <Github size={16} />
+              GitHub
+            </a>
+            <a href={`${import.meta.env.BASE_URL}${profile.resumeFile}`} download className="btn-glass btn-compact">
+              <Download size={16} />
+              Resume
             </a>
           </div>
         </Reveal>

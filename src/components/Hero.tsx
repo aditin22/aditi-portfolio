@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Mail } from 'lucide-react'
+import { ArrowRight, Download, Github, Linkedin } from 'lucide-react'
 import { marquee, profile } from '../data/resume'
 import { HeroCube } from './HeroCube'
 import { ParticleField } from './ParticleField'
@@ -39,43 +39,88 @@ export function Hero() {
             style={{ color: 'rgba(255,255,255,0.6)' }}
           >
             <span className="live-dot" />
-            Open to Software Engineer roles
+            Open to opportunities
           </motion.span>
 
           <motion.h1 variants={rise} className="t-h1 text-white">
-            <span className="block">Three years of</span>
-            <span className="block">enterprise systems.</span>
-            <span className="t-acc block">Shipped.</span>
+            <span className="block">{profile.name}</span>
+            <span className="t-acc block">{profile.role}.</span>
           </motion.h1>
+
+          <motion.ul
+            variants={rise}
+            className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 lg:justify-start"
+            aria-label="Core stack"
+          >
+            {profile.tagline.map((t, i) => (
+              <li key={t} className="flex items-center gap-2 text-[14px] font-semibold text-white">
+                {/* Separator leads the item so a wrapped line never ends in a dangling dot. */}
+                {i > 0 && (
+                  <span className="h-1 w-1 rounded-full" style={{ background: 'rgba(255,255,255,0.45)' }} />
+                )}
+                {t}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.p
             variants={rise}
             className="mt-5 max-w-[560px] text-[15.5px] leading-[1.55] md:mt-6 md:text-[17px] md:leading-[1.6]"
-            style={{ color: 'rgba(255,255,255,0.78)' }}
+            style={{ color: 'rgba(255,255,255,0.8)' }}
           >
-            {profile.name} — Software Engineer building with C#, .NET Core, React and SQL.
-            Payments, hedge-fund reconciliation and offline-to-cloud sync, built to stay correct
-            under real load.
+            {profile.positioning}
           </motion.p>
 
-          <motion.div variants={rise} className="mt-7 flex flex-nowrap items-center justify-center gap-2.5 md:mt-9 md:gap-3 lg:justify-start">
+          <motion.div variants={rise} className="mt-6 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+            {[`${profile.years} years experience`, profile.location].map((t) => (
+              <span
+                key={t}
+                className="rounded-md px-2.5 py-1 font-mono text-[12px] font-medium text-white"
+                style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.22)' }}
+              >
+                {t}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div variants={rise} className="mt-7 flex flex-nowrap items-center justify-center gap-2.5 md:mt-8 md:gap-3 lg:justify-start">
             <a href="#work" className="btn-white btn-compact">
-              See the work
+              View my work
               <ArrowRight size={16} />
             </a>
-            <a href={`mailto:${profile.email}`} className="btn-glass btn-compact">
-              <Mail size={16} />
-              Get in touch
+            <a
+              href={`${import.meta.env.BASE_URL}${profile.resumeFile}`}
+              download
+              className="btn-glass btn-compact"
+            >
+              <Download size={16} />
+              Resume
             </a>
           </motion.div>
 
-          <motion.p
+          <motion.div
             variants={rise}
-            className="mt-6 text-[11.5px] font-semibold uppercase tracking-[1.4px] md:mt-7 md:text-[13px] md:tracking-[1.6px]"
-            style={{ color: 'rgba(255,255,255,0.5)' }}
+            className="mt-6 flex items-center justify-center gap-5 lg:justify-start"
           >
-            {profile.location} · 3 years experience
-          </motion.p>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold transition-opacity hover:opacity-100"
+              style={{ color: 'rgba(255,255,255,0.75)' }}
+            >
+              <Github size={15} /> GitHub
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold transition-opacity hover:opacity-100"
+              style={{ color: 'rgba(255,255,255,0.75)' }}
+            >
+              <Linkedin size={15} /> LinkedIn
+            </a>
+          </motion.div>
         </motion.div>
 
         <motion.div

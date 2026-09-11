@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aditin22.github.io/aditi-portfolio/sitemap.xml

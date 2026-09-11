@@ -293,10 +293,10 @@ html.dark .tile-aqua {
 }
 @media (max-width: 767px) {
   .stat {
-    border-left: none;
-  }
-  .stat:nth-child(even) {
     border-left: 1px solid var(--border);
+  }
+  .stat:nth-child(3n + 1) {
+    border-left: none;
   }
 }
 

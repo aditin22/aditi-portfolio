@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
-import { Briefcase, ChevronDown, MapPin, TrendingUp } from 'lucide-react'
-import { experience, type Role } from '../data/resume'
+import { ArrowRight, Briefcase, ChevronDown, MapPin, TrendingUp } from 'lucide-react'
+import { caseStudies, experience, type Role } from '../data/resume'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 
@@ -15,7 +15,7 @@ export function Experience() {
   })
 
   return (
-    <section id="work" className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
+    <section id="experience" className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
       <SectionHead
         eyebrow="Experience"
         title="Three years, two companies,"
@@ -71,6 +71,29 @@ export function Experience() {
                     <TrendingUp size={12} /> {role.companyNote}
                   </p>
                 )}
+
+                <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink-2">{role.summary}</p>
+
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {role.caseStudies.map((id) => {
+                    const cs = caseStudies.find((c) => c.id === id)
+                    if (!cs) return null
+                    return (
+                      <a
+                        key={id}
+                        href={`#case-${id}`}
+                        className="group inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12.5px] font-semibold transition-colors"
+                        style={{
+                          background: `color-mix(in srgb, var(--${cs.accent}) 14%, transparent)`,
+                          color: `var(--${cs.accent}-text)`,
+                        }}
+                      >
+                        {cs.name} case study
+                        <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+                      </a>
+                    )
+                  })}
+                </div>
               </Reveal>
 
               <div className="mt-6 space-y-5">

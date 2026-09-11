@@ -51,20 +51,24 @@ scope. To move to CI deploys: `gh auth refresh -s workflow`, add
 src/
   data/resume.ts        every piece of copy and every number, in one place
   store/theme.ts        dark/light, persisted, pre-painted in index.html
+  store/diagram.ts      which architecture diagram is open; case studies set it
   components/
     Hero.tsx            gradient hero: headline left, rolling die right
     HeroCube.tsx        floating glass die, six faces of shipped work
     ParticleField.tsx   cursor-reactive constellation canvas
-    Experience.tsx      scroll-drawn timeline, metric-first project blocks
+    WhatIBuild.tsx      three cards stating the professional identity
+    FeaturedWork.tsx    the three case studies — problem, ownership, challenges, flows
+    FlowChain.tsx       a pipeline as a row of steps (auth flow, payment flow, data path)
+    Experience.tsx      scroll-drawn timeline, role summaries, links into case studies
     Impact.tsx          four animated charts (charts.tsx holds the primitives)
     Projects.tsx        cards led by ProjectGlyph.tsx animated diagrams
-    Architecture.tsx    two interactive React Flow system diagrams
+    Architecture.tsx    two React Flow system diagrams — drag and pan, zoom locked
     Skills.tsx          the stack, layer by layer, with where each was shipped
     About.tsx           credentials as a dial, a medal and a distribution curve
     Reveal.tsx          the scroll-entrance primitive everything else uses
 ```
 
-Content lives entirely in `src/data/resume.ts`. Editing a bullet, a metric or a
+Content lives entirely in `src/data/resume.ts`, including the three case studies. Editing a bullet, a metric or a
 stack chip there updates every place it appears — no component holds copy.
 
 ### Design language
@@ -138,6 +142,14 @@ scaled down. Fitting the wide layout into a phone drove React Flow's zoom to
 0.56, rendering 13px node labels at 7px. Nodes also take a fixed width on
 phones: with `min-width` a long caption could widen a node, which made the
 graph's real footprint unpredictable and let `fitView` race the measurement.
+
+## Metadata
+
+`index.html` carries the title, description, canonical URL, OpenGraph and
+Twitter cards, and a JSON-LD `Person`. `public/` holds the favicon, `og.png`
+(1200×630), `robots.txt`, `sitemap.xml` and the resume PDF the download
+buttons point at. The OG card is drawn natively with AppKit
+(see the session notes) because macOS's SVG renderer ignores `font-weight`.
 
 ## Accessibility
 
