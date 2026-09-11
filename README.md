@@ -1,5 +1,7 @@
 # Aditi Navhal — Portfolio
 
+**Live:** https://aditin22.github.io/aditi-portfolio/
+
 A single-page portfolio for a .NET + React full-stack engineer, built to be looked
 at as much as read: the numbers are drawn, the systems are diagrammed, and the
 toolkit is a thing you can spin.
@@ -24,6 +26,24 @@ npm run dev
 ```
 
 `npm run build` type-checks and emits to `dist/`; `npm run preview` serves that build.
+
+## Deploying
+
+```bash
+npm run deploy
+```
+
+Builds and force-pushes `dist/` to the `gh-pages` branch, which Pages serves at
+the root. The branch only ever holds the current build — the source history on
+`main` is never touched.
+
+`vite.config.ts` sets `base` to `/aditi-portfolio/` for production builds only,
+so assets resolve under the project subpath while dev stays at `/`. Renaming the
+repo means changing that value too.
+
+There is no Actions workflow because the local `gh` token has no `workflow`
+scope. To move to CI deploys: `gh auth refresh -s workflow`, add
+`.github/workflows/deploy.yml`, then switch the Pages source to "GitHub Actions".
 
 ## How it's put together
 
