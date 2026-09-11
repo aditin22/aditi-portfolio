@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
-type Line = { text: string; cls?: string; pause?: number }
+type Line = { text: string; cls?: string; pause?: number; hang?: boolean }
 
 const LINES: Line[] = [
   { text: '$ aditi --whoami', cls: 'text-brand' },
   { text: '', pause: 120 },
   { text: 'public sealed class Engineer', cls: 'text-[color:var(--dotnet-text)]' },
   { text: '{', cls: 'text-ink-3' },
-  { text: '    Stack   => [".NET Core", "React", "TypeScript", "SQL"],', cls: 'text-ink-2' },
-  { text: '    Shipped => "100+ services, 26 synced entities, 100+ reports",', cls: 'text-ink-2' },
-  { text: '    Cares   => "idempotency, RBAC, clean data paths",', cls: 'text-ink-2' },
+  { text: '    Stack   => [".NET Core", "React", "TypeScript", "SQL"],', cls: 'text-ink-2', hang: true },
+  { text: '    Shipped => "100+ services, 26 synced entities, 100+ reports",', cls: 'text-ink-2', hang: true },
+  { text: '    Cares   => "idempotency, RBAC, clean data paths",', cls: 'text-ink-2', hang: true },
   { text: '}', cls: 'text-ink-3' },
   { text: '', pause: 160 },
   { text: '✓ build succeeded — 0 warnings', cls: 'text-[color:var(--green-text)]' },
@@ -78,13 +78,23 @@ export function Terminal() {
         </span>
       </div>
 
-      <pre className="overflow-x-auto p-4 font-mono text-[12.5px] leading-[1.75] md:text-[13px]">
+      <pre
+        className="whitespace-pre-wrap p-4 font-mono text-[12.5px] leading-[1.75] md:text-[13px]"
+        style={{ overflowWrap: 'anywhere', wordBreak: 'normal' }}
+      >
         <code>
           {LINES.map((l, i) => {
             const visible = done ? l.text : i < line ? l.text : i === line ? l.text.slice(0, chars) : ''
             if (!done && i > line) return null
             return (
-              <div key={i} className={l.cls ?? 'text-ink-2'} style={{ minHeight: '1.75em' }}>
+              <div
+                key={i}
+                className={l.cls ?? 'text-ink-2'}
+                style={{
+                  minHeight: '1.75em',
+                  ...(l.hang ? { paddingLeft: '15ch', textIndent: '-15ch' } : {}),
+                }}
+              >
                 {visible}
                 {!done && i === line && <span className="caret ml-0.5" />}
               </div>

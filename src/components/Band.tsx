@@ -8,7 +8,7 @@ import { Terminal } from './Terminal'
 export function Band() {
   return (
     <section className="band overflow-hidden py-16 md:py-[72px]">
-      <div className="mx-auto grid max-w-shell items-center gap-10 px-6 md:grid-cols-[1fr_0.95fr] md:gap-12 lg:gap-14">
+      <div className="mx-auto grid max-w-shell items-center gap-10 px-6 md:grid-cols-[1fr_0.95fr] md:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="min-w-0">
           <Reveal>
             <span className="t-eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>
