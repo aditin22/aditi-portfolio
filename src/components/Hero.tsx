@@ -31,7 +31,7 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.09 } } }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left"
+          className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left"
         >
           <motion.span
             variants={rise}
