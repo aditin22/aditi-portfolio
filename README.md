@@ -116,6 +116,23 @@ flips.
   edges into an absolutely-positioned zero-width container, where that clamp
   resolves to `0` and silently collapses the entire edge layer.
 
+## Responsive behaviour
+
+Breakpoints do real layout work here, not just reflow:
+
+| | Phone (<768px) | Desktop |
+|---|---|---|
+| Hero | Stacked, centred; compact buttons on one row | Split — copy left, die right |
+| Hero die | 220–260px, sized off viewport width | 260–340px, sized off height |
+| Architecture | Tall single-column layout, fixed 128px nodes, wrapping labels | Wide left-to-right layout |
+| Skills, projects, impact | One column | Two to four |
+
+The architecture diagrams carry **two hand-placed layouts** rather than one graph
+scaled down. Fitting the wide layout into a phone drove React Flow's zoom to
+0.56, rendering 13px node labels at 7px. Nodes also take a fixed width on
+phones: with `min-width` a long caption could widen a node, which made the
+graph's real footprint unpredictable and let `fitView` race the measurement.
+
 ## Accessibility
 
 Semantic landmarks and headings, a skip link, labelled controls, visible focus,

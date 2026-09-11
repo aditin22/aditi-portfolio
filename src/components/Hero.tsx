@@ -26,7 +26,7 @@ export function Hero() {
       <span className="hero-orb hero-orb-b" aria-hidden="true" />
       <ParticleField />
 
-      <div className="relative z-[2] mx-auto grid w-full max-w-[1220px] flex-1 items-center gap-10 px-6 pb-6 pt-32 lg:grid-cols-[1fr_auto] lg:gap-16 lg:pt-24">
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1220px] flex-1 items-center gap-10 px-6 pb-6 pt-28 lg:grid-cols-[1fr_auto] lg:gap-16 lg:pt-24">
         <motion.div
           initial="hidden"
           animate="show"
@@ -50,7 +50,7 @@ export function Hero() {
 
           <motion.p
             variants={rise}
-            className="mt-6 max-w-[560px] text-[17px] leading-[1.6]"
+            className="mt-5 max-w-[560px] text-[15.5px] leading-[1.55] md:mt-6 md:text-[17px] md:leading-[1.6]"
             style={{ color: 'rgba(255,255,255,0.78)' }}
           >
             {profile.name} — Software Engineer building with C#, .NET Core, React and SQL.
@@ -58,20 +58,20 @@ export function Hero() {
             under real load.
           </motion.p>
 
-          <motion.div variants={rise} className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-            <a href="#work" className="btn-white">
+          <motion.div variants={rise} className="mt-7 flex flex-nowrap items-center justify-center gap-2.5 md:mt-9 md:gap-3 lg:justify-start">
+            <a href="#work" className="btn-white btn-compact">
               See the work
-              <ArrowRight size={17} />
+              <ArrowRight size={16} />
             </a>
-            <a href={`mailto:${profile.email}`} className="btn-glass">
-              <Mail size={17} />
+            <a href={`mailto:${profile.email}`} className="btn-glass btn-compact">
+              <Mail size={16} />
               Get in touch
             </a>
           </motion.div>
 
           <motion.p
             variants={rise}
-            className="mt-7 text-[13px] font-semibold uppercase tracking-[1.6px]"
+            className="mt-6 text-[11.5px] font-semibold uppercase tracking-[1.4px] md:mt-7 md:text-[13px] md:tracking-[1.6px]"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
             {profile.location} · 3 years experience

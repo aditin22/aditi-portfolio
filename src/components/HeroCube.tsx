@@ -293,7 +293,7 @@ export function HeroCube() {
       </div>
 
       {/* Face label + manual control */}
-      <div className="mt-[52px] flex items-center gap-2.5">
+      <div className="mt-[44px] flex items-center gap-2.5">
         <span
           className="font-mono text-[10.5px] uppercase tracking-[1.4px]"
           style={{ color: 'rgba(255,255,255,0.66)' }}

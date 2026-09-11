@@ -200,7 +200,7 @@ canvas {
 /* Typography scale */
 .t-h1 {
   font-family: 'Open Sans', Inter, sans-serif;
-  font-size: clamp(38px, min(6.4vh, 1.1vw + 36px), 56px);
+  font-size: clamp(33px, min(6.4vh, 1.1vw + 34px), 56px);
   line-height: 1.08;
   font-weight: 800;
   letter-spacing: -1.8px;
@@ -348,6 +348,20 @@ html.dark .tile-aqua {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
+/* Phone-sized variant of the pill buttons so both CTAs fit on one row. */
+.btn-compact {
+  padding: 11px 18px;
+  font-size: 14.5px;
+  gap: 7px;
+}
+@media (min-width: 768px) {
+  .btn-compact {
+    padding: 14px 26px;
+    font-size: 16px;
+    gap: 8px;
+  }
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -370,13 +384,21 @@ html.dark .tile-aqua {
    are pushed out to half the cube's width and the whole thing rolls by
    rotating the container, so every face keeps its own flat layout. */
 .cube-stage {
-  --s: clamp(190px, min(46vw, 33vh), 360px);
+  /* Phones are width-bound, desktops height-bound — one clamp that satisfies
+     both ends up shrinking the desktop die, so they get separate rules. */
+  --s: clamp(220px, min(70vw, 32vh), 340px);
   position: relative;
   width: var(--s);
   height: var(--s);
   perspective: 1150px;
   animation: cube-float 6s ease-in-out infinite;
 }
+@media (min-width: 768px) {
+  .cube-stage {
+    --s: clamp(260px, min(34vw, 42vh), 340px);
+  }
+}
+
 @keyframes cube-float {
   0%,
   100% {
@@ -596,7 +618,7 @@ html.dark .tile-aqua {
 }
 .react-flow__edge-text {
   fill: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
 }
 .react-flow__edge-textbg {

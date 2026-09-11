@@ -130,10 +130,10 @@ export function ProjectGlyph({ id, accent }: { id: string; accent: Accent }) {
           animate={reduced ? { pathLength: 1 } : { pathLength: [0, 1, 1, 0] }}
           transition={{ duration: 2.8, ease: EASE, ...loop }}
         />
-        <text x="22" y="88" textAnchor="middle" fontSize="8" fill="var(--text-hint)" fontFamily="monospace">
+        <text x="22" y="88" textAnchor="middle" fontSize="10" fill="var(--text-hint)" fontFamily="monospace">
           tally
         </text>
-        <text x="218" y="82" textAnchor="middle" fontSize="8" fill="var(--text-hint)" fontFamily="monospace">
+        <text x="218" y="82" textAnchor="middle" fontSize="10" fill="var(--text-hint)" fontFamily="monospace">
           cloud
         </text>
       </svg>

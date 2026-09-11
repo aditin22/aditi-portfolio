@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   Background,
   BackgroundVariant,
@@ -16,121 +16,172 @@ import { useTheme } from '../store/theme'
 
 const nodeTypes = { arch: ArchNode }
 
-function n(
-  id: string,
-  x: number,
-  y: number,
-  data: Record<string, unknown>,
-): Node {
-  return { id, type: 'arch', position: { x, y }, data, draggable: true }
+type Side = 'top' | 'right' | 'bottom' | 'left'
+type XY = readonly [number, number]
+
+type NodeSpec = {
+  id: string
+  label: string
+  sub: string
+  icon: string
+  accent: 'react' | 'dotnet' | 'data' | 'cloud'
+  /** Wide layout: laid out left-to-right. */
+  wide: XY
+  wideHandles: Side[]
+  /** Narrow layout: a single column that reads as a pipeline on a phone. */
+  narrow: XY
+  narrowHandles: Side[]
 }
 
-function e(
-  id: string,
-  source: string,
-  target: string,
-  opts: { label?: string; animated?: boolean; sh?: string; th?: string } = {},
-): Edge {
-  return {
-    id,
-    source,
-    target,
-    sourceHandle: opts.sh ?? 's-right',
-    targetHandle: opts.th ?? 't-left',
-    animated: opts.animated ?? true,
-    label: opts.label,
-    type: 'smoothstep',
-    markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14 },
-    labelBgPadding: [6, 3],
-    labelBgBorderRadius: 4,
-  }
+type EdgeSpec = {
+  id: string
+  source: string
+  target: string
+  label?: string
+  animated?: boolean
+  /** [sourceHandle, targetHandle] per layout. */
+  wide: readonly [string, string]
+  narrow: readonly [string, string]
 }
 
-type Diagram = { title: string; caption: string; nodes: Node[]; edges: Edge[] }
-
-const DIAGRAMS: Record<'tally' | 'fylflix', Diagram> = {
+/**
+ * Two hand-placed layouts per diagram rather than one graph scaled down.
+ * Fitting the wide layout into a phone drove React Flow's zoom to 0.56, which
+ * rendered 13px node labels at 7px — legible only in principle. The narrow
+ * layout is tall and single-column so it fits at roughly 1:1.
+ */
+const DIAGRAMS = {
   tally: {
     title: 'Tally Connector',
     caption:
       'A Windows Service reads 26 TallyPrime entities over local IPC, stages them in SQLite, and delta-syncs to the cloud. Every write-back is idempotent, so a retry after a network drop can never post the same financial entry twice.',
     nodes: [
-      n('tally', 0, 120, { label: 'TallyPrime', sub: 'on-premise ERP', icon: 'Building2', accent: 'cloud', handles: ['right'] }),
-      n('svc', 250, 120, { label: 'Windows Service', sub: '.NET 10 / C#', icon: 'Cpu', accent: 'dotnet', handles: ['left', 'right', 'bottom', 'top'] }),
-      n('sqlite', 250, 260, { label: 'SQLite Stage', sub: 'delta queue', icon: 'Database', accent: 'data', handles: ['top', 'right'] }),
-      n('auth', 250, -10, { label: 'OAuth 2.0', sub: 'client credentials', icon: 'ShieldCheck', accent: 'react', handles: ['bottom'] }),
-      n('s3', 540, 40, { label: 'AWS S3', sub: 'document store', icon: 'Cloud', accent: 'cloud', handles: ['left'] }),
-      n('pg', 540, 160, { label: 'PostgreSQL', sub: 'cloud workflows', icon: 'Server', accent: 'data', handles: ['left', 'right'] }),
-      n('recon', 540, 280, { label: 'Reconciliation', sub: 'no duplicate posts', icon: 'CheckCheck', accent: 'dotnet', handles: ['left', 'top'] }),
-    ],
+      { id: 'tally', label: 'TallyPrime', sub: 'on-premise ERP', icon: 'Building2', accent: 'cloud',
+        wide: [0, 120], wideHandles: ['right'], narrow: [20, 0], narrowHandles: ['bottom'] },
+      { id: 'auth', label: 'OAuth 2.0', sub: 'client credentials', icon: 'ShieldCheck', accent: 'react',
+        wide: [250, -10], wideHandles: ['bottom'], narrow: [138, 92], narrowHandles: ['left'] },
+      { id: 'svc', label: 'Windows Service', sub: '.NET 10 / C#', icon: 'Cpu', accent: 'dotnet',
+        wide: [250, 120], wideHandles: ['left', 'right', 'bottom', 'top'], narrow: [20, 92], narrowHandles: ['top', 'right', 'bottom'] },
+      { id: 'sqlite', label: 'SQLite Stage', sub: 'delta queue', icon: 'Database', accent: 'data',
+        wide: [250, 260], wideHandles: ['top', 'right'], narrow: [20, 200], narrowHandles: ['top', 'bottom'] },
+      { id: 'recon', label: 'Reconciliation', sub: 'no duplicate posts', icon: 'CheckCheck', accent: 'dotnet',
+        wide: [540, 280], wideHandles: ['left', 'top'], narrow: [20, 308], narrowHandles: ['top', 'bottom'] },
+      { id: 'pg', label: 'PostgreSQL', sub: 'cloud workflows', icon: 'Server', accent: 'data',
+        wide: [540, 160], wideHandles: ['left', 'right'], narrow: [20, 416], narrowHandles: ['top', 'right', 'bottom'] },
+      { id: 's3', label: 'AWS S3', sub: 'document store', icon: 'Cloud', accent: 'cloud',
+        wide: [540, 40], wideHandles: ['left'], narrow: [20, 524], narrowHandles: ['top'] },
+    ] satisfies NodeSpec[],
     edges: [
-      e('e1', 'tally', 'svc', { label: 'IPC' }),
-      e('e2', 'svc', 'sqlite', { sh: 's-bottom', th: 't-top', label: 'stage' }),
-      e('e3', 'auth', 'svc', { sh: 's-bottom', th: 't-top', animated: false, label: 'token' }),
-      e('e4', 'svc', 's3', { label: 'upload' }),
-      e('e5', 'svc', 'pg', { label: 'write-back' }),
-      e('e6', 'sqlite', 'recon', { label: 'delta' }),
-      e('e7', 'recon', 'pg', { sh: 's-top', th: 't-right', animated: false, label: 'verify' }),
-    ],
+      { id: 'e1', source: 'tally', target: 'svc', label: 'IPC', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'e3', source: 'auth', target: 'svc', label: 'token', animated: false, wide: ['s-bottom', 't-top'], narrow: ['s-left', 't-right'] },
+      { id: 'e2', source: 'svc', target: 'sqlite', label: 'stage', wide: ['s-bottom', 't-top'], narrow: ['s-bottom', 't-top'] },
+      { id: 'e6', source: 'sqlite', target: 'recon', label: 'delta', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'e7', source: 'recon', target: 'pg', label: 'verify', animated: false, wide: ['s-top', 't-right'], narrow: ['s-bottom', 't-top'] },
+      { id: 'e5', source: 'svc', target: 'pg', label: 'write-back', wide: ['s-right', 't-left'], narrow: ['s-right', 't-right'] },
+      { id: 'e4', source: 'pg', target: 's3', label: 'upload', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+    ] satisfies EdgeSpec[],
   },
   fylflix: {
     title: 'FylFlix Platform',
     caption:
       'Four product surfaces share one design system and one auth core. Razorpay activation is verified by polling rather than trusting the client, and every organization boundary is enforced by RBAC before a query is ever issued.',
     nodes: [
-      n('b2c', 0, 0, { label: 'B2C', sub: 'consumer app', icon: 'Users', accent: 'react', handles: ['right'] }),
-      n('b2b', 0, 90, { label: 'B2B', sub: '100+ services', icon: 'Briefcase', accent: 'react', handles: ['right'] }),
-      n('legal', 0, 180, { label: 'Legal', sub: 'booking & chat', icon: 'Scale', accent: 'react', handles: ['right'] }),
-      n('admin', 0, 270, { label: 'Admin', sub: 'operations', icon: 'Settings', accent: 'react', handles: ['right'] }),
-      n('ds', 265, 135, { label: 'Design System', sub: 'Radix + Tailwind', icon: 'Component', accent: 'react', handles: ['left', 'right', 'bottom'] }),
-      n('auth', 530, 20, { label: 'Auth Core', sub: 'OAuth 2.0 · JWT', icon: 'KeyRound', accent: 'dotnet', handles: ['left', 'right'] }),
-      n('rbac', 530, 135, { label: 'Multi-org RBAC', sub: 'scoped access', icon: 'ShieldCheck', accent: 'dotnet', handles: ['left', 'right'] }),
-      n('pay', 530, 250, { label: 'Razorpay', sub: 'polled verification', icon: 'CreditCard', accent: 'cloud', handles: ['left', 'right'] }),
-      n('api', 790, 135, { label: 'REST APIs', sub: 'PostgreSQL', icon: 'Database', accent: 'data', handles: ['left'] }),
-    ],
+      { id: 'b2c', label: 'B2C', sub: 'consumer app', icon: 'Users', accent: 'react',
+        wide: [0, 0], wideHandles: ['right'], narrow: [0, 0], narrowHandles: ['bottom'] },
+      { id: 'b2b', label: 'B2B', sub: '100+ services', icon: 'Briefcase', accent: 'react',
+        wide: [0, 90], wideHandles: ['right'], narrow: [138, 0], narrowHandles: ['bottom'] },
+      { id: 'legal', label: 'Legal', sub: 'booking & chat', icon: 'Scale', accent: 'react',
+        wide: [0, 180], wideHandles: ['right'], narrow: [0, 74], narrowHandles: ['bottom'] },
+      { id: 'admin', label: 'Admin', sub: 'operations', icon: 'Settings', accent: 'react',
+        wide: [0, 270], wideHandles: ['right'], narrow: [138, 74], narrowHandles: ['bottom'] },
+      { id: 'ds', label: 'Design System', sub: 'Radix + Tailwind', icon: 'Component', accent: 'react',
+        wide: [265, 135], wideHandles: ['left', 'right', 'bottom'], narrow: [69, 164], narrowHandles: ['top', 'bottom'] },
+      { id: 'auth', label: 'Auth Core', sub: 'OAuth 2.0 · JWT', icon: 'KeyRound', accent: 'dotnet',
+        wide: [530, 20], wideHandles: ['left', 'right'], narrow: [0, 258], narrowHandles: ['top', 'bottom'] },
+      { id: 'rbac', label: 'Multi-org RBAC', sub: 'scoped access', icon: 'ShieldCheck', accent: 'dotnet',
+        wide: [530, 135], wideHandles: ['left', 'right'], narrow: [138, 258], narrowHandles: ['top', 'bottom'] },
+      { id: 'pay', label: 'Razorpay', sub: 'polled verification', icon: 'CreditCard', accent: 'cloud',
+        wide: [530, 250], wideHandles: ['left', 'right'], narrow: [69, 348], narrowHandles: ['top', 'bottom'] },
+      { id: 'api', label: 'REST APIs', sub: 'PostgreSQL', icon: 'Database', accent: 'data',
+        wide: [790, 135], wideHandles: ['left'], narrow: [69, 438], narrowHandles: ['top'] },
+    ] satisfies NodeSpec[],
     edges: [
-      e('f1', 'b2c', 'ds'),
-      e('f2', 'b2b', 'ds'),
-      e('f3', 'legal', 'ds'),
-      e('f4', 'admin', 'ds'),
-      e('f5', 'ds', 'auth', { label: 'session' }),
-      e('f6', 'ds', 'rbac'),
-      e('f7', 'ds', 'pay', { label: 'checkout' }),
-      e('f8', 'auth', 'api', { animated: false }),
-      e('f9', 'rbac', 'api', { label: 'scoped query' }),
-      e('f10', 'pay', 'api', { animated: false, label: 'idempotent activation' }),
-    ],
+      { id: 'f1', source: 'b2c', target: 'ds', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f2', source: 'b2b', target: 'ds', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f3', source: 'legal', target: 'ds', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f4', source: 'admin', target: 'ds', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f5', source: 'ds', target: 'auth', label: 'session', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f6', source: 'ds', target: 'rbac', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f7', source: 'ds', target: 'pay', label: 'checkout', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f8', source: 'auth', target: 'api', animated: false, wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f9', source: 'rbac', target: 'api', label: 'scoped query', wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+      { id: 'f10', source: 'pay', target: 'api', label: 'idempotent activation', animated: false, wide: ['s-right', 't-left'], narrow: ['s-bottom', 't-top'] },
+    ] satisfies EdgeSpec[],
   },
-}
+} as const
 
 type Key = keyof typeof DIAGRAMS
+
+/** True below the `md` breakpoint, kept in sync with the CSS. */
+function useNarrow() {
+  const [narrow, setNarrow] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  )
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const on = (e: MediaQueryListEvent) => setNarrow(e.matches)
+    mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [])
+  return narrow
+}
 
 export function Architecture() {
   const [key, setKey] = useState<Key>('tally')
   const theme = useTheme((s) => s.theme)
+  const narrow = useNarrow()
   const d = DIAGRAMS[key]
 
-  // Remount React Flow when the diagram changes so fitView re-runs on the new graph.
-  const flow = useMemo(
-    () => (
-      <ReactFlow
-        key={key}
-        nodes={d.nodes}
-        edges={d.edges}
-        nodeTypes={nodeTypes}
-        fitView
-        fitViewOptions={{ padding: 0.18 }}
-        minZoom={0.4}
-        maxZoom={1.6}
-        proOptions={{ hideAttribution: true }}
-        nodesConnectable={false}
-        edgesFocusable={false}
-        colorMode={theme}
-      >
-        <Background variant={BackgroundVariant.Dots} gap={22} size={1} color="var(--border-mid)" />
-        <Controls showInteractive={false} position="bottom-right" />
-      </ReactFlow>
-    ),
-    [key, d, theme],
+  const nodes: Node[] = useMemo(
+    () =>
+      d.nodes.map((n) => {
+        const [x, y] = narrow ? n.narrow : n.wide
+        return {
+          id: n.id,
+          type: 'arch',
+          position: { x, y },
+          draggable: true,
+          data: {
+            label: n.label,
+            sub: n.sub,
+            icon: n.icon,
+            accent: n.accent,
+            handles: narrow ? n.narrowHandles : n.wideHandles,
+          },
+        }
+      }),
+    [d, narrow],
+  )
+
+  const edges: Edge[] = useMemo(
+    () =>
+      d.edges.map((e) => {
+        const [sh, th] = narrow ? e.narrow : e.wide
+        return {
+          id: e.id,
+          source: e.source,
+          target: e.target,
+          sourceHandle: sh,
+          targetHandle: th,
+          animated: e.animated ?? true,
+          label: e.label,
+          type: 'smoothstep',
+          markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14 },
+          labelBgPadding: [6, 3] as [number, number],
+          labelBgBorderRadius: 4,
+        }
+      }),
+    [d, narrow],
   )
 
   return (
@@ -153,9 +204,7 @@ export function Architecture() {
               className="relative rounded-md px-3.5 py-1.5 text-[13px] font-medium transition-colors"
               style={{ color: key === k ? '#fff' : 'var(--text-secondary)' }}
             >
-              {key === k && (
-                <span className="absolute inset-0 rounded-md bg-brand" style={{ zIndex: 0 }} />
-              )}
+              {key === k && <span className="absolute inset-0 rounded-md bg-brand" style={{ zIndex: 0 }} />}
               <span className="relative z-[1]">{DIAGRAMS[k].title}</span>
             </button>
           ))}
@@ -163,11 +212,26 @@ export function Architecture() {
       </Reveal>
 
       <Reveal delay={0.08}>
-        <div
-          className="h-[440px] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card md:h-[500px]"
-          style={{ background: 'var(--bg-surface)' }}
-        >
-          {flow}
+        {/* Taller on phones: the narrow layout is a tall column, and the extra
+            height is what lets it fit near 1:1 instead of being zoomed to 0.56. */}
+        <div className="h-[600px] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card md:h-[500px]">
+          <ReactFlow
+            key={`${key}-${narrow ? 'n' : 'w'}`}
+            nodes={nodes}
+            edges={edges}
+            nodeTypes={nodeTypes}
+            fitView
+            fitViewOptions={{ padding: narrow ? 0.03 : 0.18 }}
+            minZoom={0.4}
+            maxZoom={1.6}
+            proOptions={{ hideAttribution: true }}
+            nodesConnectable={false}
+            edgesFocusable={false}
+            colorMode={theme}
+          >
+            <Background variant={BackgroundVariant.Dots} gap={22} size={1} color="var(--border-mid)" />
+            <Controls showInteractive={false} position="bottom-right" />
+          </ReactFlow>
         </div>
         <p className="mt-4 max-w-3xl text-[14px] leading-relaxed text-ink-2">{d.caption}</p>
       </Reveal>
