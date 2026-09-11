@@ -1,0 +1,639 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ───────────────────────────────────────────────────────────
+   Light is the fallback palette; dark wins by default (set pre-paint in
+   index.html). Every colour is defined on :root first so nothing lives only
+   inside the .dark block. */
+:root {
+  --bg-page: #f8f9fa;
+  --bg-surface: #ffffff;
+  --bg-surface2: #f1f3f4;
+  --bg-surface3: #e8eaed;
+  --bg-hover: #f1f3f4;
+  --bg-active: #e0eef5;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-muted: #80868b;
+  --text-hint: #9aa0a6;
+  --border: #e8eaed;
+  --border-mid: #dadce0;
+  --blue: #0088cc;
+  --blue-dark: #00699d;
+  --blue-light: #e0eef5;
+  --blue-mid: #3ea0d2;
+  --blue-text: #00699d;
+  --green: #34a853;
+  --green-light: #e6f4ea;
+  --green-text: #137333;
+  --red: #ea4335;
+  --red-light: #fce8e6;
+  --yellow: #fbbc04;
+  --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.1), 0 1px 3px rgba(60, 64, 67, 0.08);
+  --shadow: 0 1px 3px rgba(60, 64, 67, 0.12), 0 2px 8px rgba(60, 64, 67, 0.1);
+  --shadow-md: 0 4px 12px rgba(60, 64, 67, 0.15), 0 2px 4px rgba(60, 64, 67, 0.1);
+  --shadow-lg: 0 8px 28px rgba(60, 64, 67, 0.2), 0 4px 8px rgba(60, 64, 67, 0.12);
+
+  /* Per-domain accents, one per project surface */
+  --dotnet: #6d4aff;
+  --dotnet-soft: #ece8ff;
+  --dotnet-text: #4a2fcf;
+  --react: #0088cc;
+  --react-soft: #e0eef5;
+  --react-text: #00699d;
+  --data: #0d9488;
+  --data-soft: #d8f3f0;
+  --data-text: #0d7a70;
+  --cloud: #d97706;
+  --cloud-soft: #fdebd0;
+  --cloud-text: #b45309;
+
+  --term-bg: #1e1e1e;
+  --topbar-h: 64px;
+  color-scheme: light;
+}
+
+html.dark {
+  --bg-page: #0f1117;
+  --bg-surface: #1c1e26;
+  --bg-surface2: #262830;
+  --bg-surface3: #31343e;
+  --bg-hover: #262830;
+  --bg-active: #132d3b;
+  --text-primary: #e8eaed;
+  --text-secondary: #b6bac2;
+  --text-muted: #9aa0a6;
+  --text-hint: #80868b;
+  --border: #31343e;
+  --border-mid: #3c4043;
+  --blue: #35aae5;
+  --blue-dark: #6eb8dd;
+  --blue-light: #132d3b;
+  --blue-mid: #89c4e2;
+  --blue-text: #8cc6e3;
+  --green: #34a853;
+  --green-light: #1a3a24;
+  --green-text: #5bb974;
+  --red: #f28b82;
+  --red-light: #3b1d1a;
+  --yellow: #fdd663;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.5);
+
+  --dotnet: #8f74ff;
+  --dotnet-soft: #241f3a;
+  --dotnet-text: #b8a6ff;
+  --react: #35aae5;
+  --react-soft: #132d3b;
+  --react-text: #8cc6e3;
+  --data: #2dd4bf;
+  --data-soft: #16302d;
+  --data-text: #5eead4;
+  --cloud: #fbbf24;
+  --cloud-soft: #3a2e12;
+  --cloud-text: #fcd34d;
+
+  --term-bg: #0c0d10;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topbar-h) + 16px);
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.2s ease;
+  overflow-x: hidden;
+}
+
+/* Suppress the cross-fade while the theme flips, exactly like the reference:
+   the toggle knob keeps its own transition so the switch still feels physical. */
+html.theme-snap *,
+html.theme-snap *::before,
+html.theme-snap *::after,
+html.theme-snap body {
+  transition: none !important;
+}
+html.theme-snap .theme-toggle-knob {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-hint);
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* Deliberately excludes `svg`: React Flow renders its edges into an
+   absolutely-positioned zero-width container, so `max-width: 100%` there
+   resolves to 0 and collapses the whole edge layer. Icons are sized
+   explicitly, so nothing here needs the clamp. */
+img,
+video,
+canvas {
+  max-width: 100%;
+}
+
+/* ── Landing-page design language ────────────────────────────────────────────
+   Lifted from the reference: an immersive blue gradient hero, big 800-weight
+   headings on tight negative tracking, large tinted tiles instead of flat
+   cards, and full-bleed colour bands that break up the dark page. */
+
+/* Hero: one deep-blue gradient, with two soft orbs floating over it. */
+.hero-gradient {
+  background: linear-gradient(150deg, #2992c2 0%, #16465c 70%, #0c2f3f 130%);
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-orb-a {
+  width: 340px;
+  height: 340px;
+  top: -70px;
+  left: -70px;
+  background: rgba(219, 244, 255, 0.45);
+}
+.hero-orb-b {
+  width: 440px;
+  height: 440px;
+  bottom: -130px;
+  right: -110px;
+  background: rgba(157, 224, 255, 0.5);
+  opacity: 0.5;
+}
+
+/* Typography scale */
+.t-h1 {
+  font-family: 'Open Sans', Inter, sans-serif;
+  font-size: clamp(38px, min(6.4vh, 1.1vw + 36px), 56px);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  margin: 0;
+}
+.t-h2 {
+  font-family: 'Open Sans', Inter, sans-serif;
+  font-size: clamp(30px, 3.4vw, 38px);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -1.1px;
+  margin: 0;
+  text-wrap: balance;
+}
+.t-display {
+  font-family: 'Open Sans', Inter, sans-serif;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  margin: 0;
+}
+.t-sub {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 14px 0 0;
+  max-width: 620px;
+}
+.t-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.t-acc {
+  color: #a9e2ff;
+}
+
+/* Tinted tiles — the reference's signature block. One hue per surface, with a
+   darker counterpart so the tint survives the theme flip. */
+.tile {
+  position: relative;
+  border-radius: 20px;
+  padding: clamp(18px, 2.4vw, 30px);
+  background: var(--tile);
+}
+.tile-sky {
+  --tile: #ddecfb;
+}
+.tile-mint {
+  --tile: #dcefe4;
+}
+.tile-sand {
+  --tile: #f7ead6;
+}
+.tile-lilac {
+  --tile: #e7e3f6;
+}
+.tile-aqua {
+  --tile: #d4ecf3;
+}
+html.dark .tile-sky {
+  --tile: #0f2739;
+}
+html.dark .tile-mint {
+  --tile: #0f2a22;
+}
+html.dark .tile-sand {
+  --tile: #2b2317;
+}
+html.dark .tile-lilac {
+  --tile: #1e1b33;
+}
+html.dark .tile-aqua {
+  --tile: #0c2b33;
+}
+
+/* Stats strip: dividers between columns, dropping to a 2-up grid where only
+   the second column in each row keeps its rule. */
+.stat {
+  border-left: 1px solid var(--border);
+}
+.stat:first-child {
+  border-left: none;
+}
+@media (max-width: 767px) {
+  .stat {
+    border-left: none;
+  }
+  .stat:nth-child(even) {
+    border-left: 1px solid var(--border);
+  }
+}
+
+/* Full-bleed colour bands */
+.band {
+  background: #16465c;
+}
+/* Deep enough to close the page without glare — the plain accent blue is far
+   too bright across a full-bleed block. Mirrors the hero gradient so the two
+   read as bookends. */
+.band-cta {
+  background: linear-gradient(160deg, #17587a 0%, #103e55 60%, #0b2a38 130%);
+}
+
+/* Buttons */
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #00699d;
+  border: none;
+  border-radius: 11px;
+  padding: 14px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.btn-white:hover {
+  transform: translateY(-2px);
+}
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 11px;
+  padding: 14px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.18s, transform 0.12s;
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.18s, transform 0.1s;
+}
+.btn-primary:hover {
+  background: var(--blue-dark);
+}
+
+/* ── Hero cube ───────────────────────────────────────────────────────────────
+   A floating glass die whose six faces are miniatures of shipped work. Faces
+   are pushed out to half the cube's width and the whole thing rolls by
+   rotating the container, so every face keeps its own flat layout. */
+.cube-stage {
+  --s: clamp(190px, min(46vw, 33vh), 360px);
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  perspective: 1150px;
+  animation: cube-float 6s ease-in-out infinite;
+}
+@keyframes cube-float {
+  0%,
+  100% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.cube {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 1.05s cubic-bezier(0.2, 0.8, 0.28, 1);
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border-radius: calc(var(--s) * 0.14);
+  overflow: hidden;
+  /* Opaque enough to actually read. A fully translucent pane let the far faces
+     show through their own front, which turned every mockup into noise —
+     `backface-visibility` handles the mirrored side, the base colour handles
+     the rest. The sheen stays, it just sits on a solid panel now. */
+  background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.04) 34%,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 255, 255, 0.04) 74%,
+      rgba(255, 255, 255, 0.12) 100%
+    ),
+    linear-gradient(160deg, #14506e 0%, #0e3a51 60%, #08222f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 18px 50px rgba(4, 16, 50, 0.45);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* Specular highlight, top-left — kept small so it never sits over the content */
+.cube-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(88% 58% at 16% 8%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 52%);
+}
+.cube-face-in {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: calc(var(--s) * 0.085);
+  display: flex;
+  flex-direction: column;
+}
+
+.cube-face-1 {
+  transform: translateZ(calc(var(--s) / 2));
+}
+.cube-face-6 {
+  transform: rotateY(180deg) translateZ(calc(var(--s) / 2));
+}
+.cube-face-3 {
+  transform: rotateY(90deg) translateZ(calc(var(--s) / 2));
+}
+.cube-face-4 {
+  transform: rotateY(-90deg) translateZ(calc(var(--s) / 2));
+}
+.cube-face-5 {
+  transform: rotateX(90deg) translateZ(calc(var(--s) / 2));
+}
+.cube-face-2 {
+  transform: rotateX(-90deg) translateZ(calc(var(--s) / 2));
+}
+
+/* Contact shadow on the ground below the die */
+.cube-floor {
+  position: absolute;
+  left: 50%;
+  bottom: -58px;
+  width: calc(var(--s) * 0.95);
+  height: 40px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(4, 16, 50, 0.5), transparent 70%);
+  filter: blur(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-stage {
+    animation: none;
+  }
+  .cube {
+    transition: none;
+  }
+}
+
+/* ── Signature animations ────────────────────────────────────────────────── */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.82);
+  }
+}
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes logo-core {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.68);
+  }
+}
+.logo-orbit {
+  animation: logo-orbit 5s linear infinite;
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+}
+.logo-core {
+  animation: logo-core 2.5s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+}
+
+/* Caret for the typed hero terminal */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  vertical-align: text-bottom;
+  background: var(--blue);
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* Marquee rail — duplicated track scrolls exactly half its width, so the seam
+   never shows. */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+.marquee-rail:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Conic sheen that rides the border of featured cards */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Grid backdrop */
+.grid-bg {
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* React Flow: repaint the canvas in our own tokens. The library's 1px default
+   disappears once the diagram is scaled down, so edges get real weight here. */
+.react-flow__attribution {
+  display: none;
+}
+.react-flow__edge-path {
+  stroke: var(--border-mid);
+  stroke-width: 1.75;
+}
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: var(--blue);
+  stroke-width: 2;
+}
+.react-flow__edge-text {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.react-flow__edge-textbg {
+  fill: var(--bg-surface);
+}
+.react-flow__arrowhead polyline {
+  stroke: var(--border-mid);
+  fill: var(--border-mid);
+}
+.react-flow__edge.animated .react-flow__arrowhead polyline {
+  stroke: var(--blue);
+  fill: var(--blue);
+}
+.react-flow__handle {
+  background: var(--blue);
+  border-color: var(--bg-surface);
+  width: 7px;
+  height: 7px;
+}
+.react-flow__controls-button {
+  background: var(--bg-surface2);
+  border-bottom: 1px solid var(--border);
+  fill: var(--text-secondary);
+}
+.react-flow__controls-button:hover {
+  background: var(--bg-surface3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
