@@ -4,7 +4,7 @@ import { profile } from '../data/resume'
 import { Reveal } from './Reveal'
 
 const CHANNELS = [
-  { icon: Mail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  { icon: Mail, label: 'Email', value: profile.email, href: profile.emailHref },
   { icon: Phone, label: 'Phone', value: profile.phone, href: `tel:${profile.phone}` },
   { icon: Linkedin, label: 'LinkedIn', value: 'aditi-navhal', href: profile.linkedin },
   { icon: Github, label: 'GitHub', value: 'aditin22', href: profile.github },
@@ -42,7 +42,7 @@ export function Contact() {
 
         <Reveal delay={0.18}>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href={`mailto:${profile.email}`} className="btn-white btn-compact">
+            <a href={profile.emailHref} target="_blank" rel="noreferrer noopener" className="btn-white btn-compact">
               <Mail size={16} />
               Email me
               <ArrowUpRight size={15} />
@@ -132,7 +132,13 @@ export function Footer() {
           >
             <Github size={16} />
           </a>
-          <a href={`mailto:${profile.email}`} aria-label="Email" className="transition-colors hover:text-brand">
+          <a
+            href={profile.emailHref}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="Email"
+            className="transition-colors hover:text-brand"
+          >
             <Mail size={16} />
           </a>
         </div>

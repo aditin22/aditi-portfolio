@@ -11,6 +11,11 @@ export const profile = {
   resumeFile: 'Aditi_Navhal_Resume.pdf',
   location: 'Delhi NCR, India',
   email: 'aditinavhal01@gmail.com',
+  /** Gmail's web compose, prefilled. A bare mailto: does nothing on machines
+   *  with no mail client configured, which is most of them. */
+  emailHref:
+    'https://mail.google.com/mail/?view=cm&fs=1&to=aditinavhal01%40gmail.com&su=' +
+    encodeURIComponent('Hello Aditi — via your portfolio'),
   phone: '+91-8769589069',
   linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
   github: 'https://github.com/aditin22',
