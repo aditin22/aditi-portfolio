@@ -4,7 +4,7 @@ import type { Accent } from '../data/resume'
 const EASE = [0.16, 1, 0.3, 1] as const
 
 /**
- * A small looping diagram per project — the shape of the system rather than a
+ * A small looping diagram per project - the shape of the system rather than a
  * screenshot. Each one animates the single idea that made the project hard.
  */
 export function ProjectGlyph({ id, accent }: { id: string; accent: Accent }) {
@@ -176,7 +176,7 @@ export function ProjectGlyph({ id, accent }: { id: string; accent: Accent }) {
     )
   }
 
-  // clients — a report estate building itself
+  // clients - a report estate building itself
   const bars = [
     { x: 14, h: 30 },
     { x: 40, h: 48 },

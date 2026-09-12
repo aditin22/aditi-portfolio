@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 import type { Accent } from '../data/resume'
 
-/** Only the icons the diagrams actually place — a namespace import would pull
+/** Only the icons the diagrams actually place - a namespace import would pull
  *  the whole lucide set into this chunk. */
 const ICONS = {
   Box,
@@ -43,7 +43,7 @@ export type ArchNodeData = {
   sub?: string
   icon: keyof typeof ICONS
   accent: Accent
-  /** Which sides actually get a connector — keeps stray dots off leaf nodes. */
+  /** Which sides actually get a connector - keeps stray dots off leaf nodes. */
   handles?: ('top' | 'right' | 'bottom' | 'left')[]
 }
 

@@ -6,7 +6,7 @@ import type { Accent } from '../data/resume'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-/** Two vertical bars — a before and an after — that grow from the baseline. */
+/** Two vertical bars - a before and an after - that grow from the baseline. */
 export function BarPair({
   a,
   b,
@@ -103,7 +103,7 @@ export function Donut({
   )
 }
 
-/** Two horizontal rails — the second visibly shorter — for a runtime cut. */
+/** Two horizontal rails - the second visibly shorter - for a runtime cut. */
 export function Rails({
   rows,
   accent,

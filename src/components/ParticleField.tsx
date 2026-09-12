@@ -64,7 +64,7 @@ export function ParticleField() {
           p.x += p.vx
           p.y += p.vy
         }
-        // Wrap rather than bounce — no visible walls.
+        // Wrap rather than bounce - no visible walls.
         if (p.x < -20) p.x = w + 20
         if (p.x > w + 20) p.x = -20
         if (p.y < -20) p.y = h + 20

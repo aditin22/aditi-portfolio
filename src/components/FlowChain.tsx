@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import type { Accent } from '../data/resume'
 
 /**
- * A pipeline as a row of steps. A bare "→" entry renders as a divider —
+ * A pipeline as a row of steps. A bare "→" entry renders as a divider -
  * used to split a before/after chain like a modernization.
  */
 export function FlowChain({ title, steps, accent }: { title: string; steps: string[]; accent: Accent }) {

@@ -13,7 +13,7 @@ const LINES: Line[] = [
   { text: '    Cares   => "idempotency, RBAC, clean data paths",', cls: 'text-ink-2', hang: true },
   { text: '}', cls: 'text-ink-3' },
   { text: '', pause: 160 },
-  { text: '✓ build succeeded — 0 warnings', cls: 'text-[color:var(--green-text)]' },
+  { text: '✓ build succeeded - 0 warnings', cls: 'text-[color:var(--green-text)]' },
 ]
 
 /**
@@ -74,7 +74,7 @@ export function Terminal() {
         <span className="h-[11px] w-[11px] rounded-full" style={{ background: '#febc2e' }} />
         <span className="h-[11px] w-[11px] rounded-full" style={{ background: '#28c840' }} />
         <span className="ml-2 font-mono text-[11px] tracking-wide" style={{ color: '#8a8f98' }}>
-          engineer.cs — zsh
+          engineer.cs - zsh
         </span>
       </div>
 

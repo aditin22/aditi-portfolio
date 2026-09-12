@@ -16,7 +16,7 @@ function apply(theme: Theme) {
   try {
     localStorage.setItem(KEY, theme)
   } catch {
-    /* private mode — the pre-paint script falls back to dark */
+    /* private mode - the pre-paint script falls back to dark */
   }
 }
 

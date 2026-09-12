@@ -47,7 +47,7 @@ type EdgeSpec = {
 /**
  * Two hand-placed layouts per diagram rather than one graph scaled down.
  * Fitting the wide layout into a phone drove React Flow's zoom to 0.56, which
- * rendered 13px node labels at 7px — legible only in principle. The narrow
+ * rendered 13px node labels at 7px - legible only in principle. The narrow
  * layout is tall and single-column so it fits at roughly 1:1.
  */
 const DIAGRAMS = {
@@ -195,7 +195,7 @@ export function Architecture() {
         eyebrow="System design"
         title="The diagrams behind"
         accent="the bullet points."
-        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
+        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside - rendered with React Flow rather than screenshotted."
       />
 
       <Reveal>
@@ -218,7 +218,7 @@ export function Architecture() {
 
       <Reveal delay={0.08}>
         {/* Narrow screens get a tall box: the vertical layout is a column, and
-            with zoom locked, fitView is the only thing that sizes the diagram —
+            with zoom locked, fitView is the only thing that sizes the diagram -
             so the box's proportions decide how large the nodes render. The
             heights below let it scale *up* past 1:1 rather than stay compact. */}
         <div className="h-[640px] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card sm:h-[760px] lg:h-[500px]">
@@ -232,7 +232,7 @@ export function Architecture() {
             minZoom={0.4}
             maxZoom={1.35}
             /* The diagram is fitted on mount; a visitor can drag nodes and pan,
-               but not zoom — wheel, pinch and double-click all stay inert so
+               but not zoom - wheel, pinch and double-click all stay inert so
                scrolling past the section never hijacks the page. */
             zoomOnScroll={false}
             zoomOnPinch={false}

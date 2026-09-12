@@ -244,7 +244,7 @@ canvas {
   color: #a9e2ff;
 }
 
-/* Tinted tiles — the reference's signature block. One hue per surface, with a
+/* Tinted tiles - the reference's signature block. One hue per surface, with a
    darker counterpart so the tint survives the theme flip. */
 .tile {
   position: relative;
@@ -304,7 +304,7 @@ html.dark .tile-aqua {
 .band {
   background: #16465c;
 }
-/* Deep enough to close the page without glare — the plain accent blue is far
+/* Deep enough to close the page without glare - the plain accent blue is far
    too bright across a full-bleed block. Mirrors the hero gradient so the two
    read as bookends. */
 .band-cta {
@@ -384,7 +384,7 @@ html.dark .tile-aqua {
    are pushed out to half the cube's width and the whole thing rolls by
    rotating the container, so every face keeps its own flat layout. */
 .cube-stage {
-  /* Phones are width-bound, desktops height-bound — one clamp that satisfies
+  /* Phones are width-bound, desktops height-bound - one clamp that satisfies
      both ends up shrinking the desktop die, so they get separate rules. */
   --s: clamp(220px, min(70vw, 32vh), 340px);
   position: relative;
@@ -423,7 +423,7 @@ html.dark .tile-aqua {
   border-radius: calc(var(--s) * 0.14);
   overflow: hidden;
   /* Opaque enough to actually read. A fully translucent pane let the far faces
-     show through their own front, which turned every mockup into noise —
+     show through their own front, which turned every mockup into noise -
      `backface-visibility` handles the mirrored side, the base colour handles
      the rest. The sheen stays, it just sits on a solid panel now. */
   background: linear-gradient(
@@ -440,7 +440,7 @@ html.dark .tile-aqua {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-/* Specular highlight, top-left — kept small so it never sits over the content */
+/* Specular highlight, top-left - kept small so it never sits over the content */
 .cube-face::before {
   content: '';
   position: absolute;
@@ -569,7 +569,7 @@ html.dark .tile-aqua {
   animation: caret-blink 1s step-end infinite;
 }
 
-/* Marquee rail — duplicated track scrolls exactly half its width, so the seam
+/* Marquee rail - duplicated track scrolls exactly half its width, so the seam
    never shows. */
 @keyframes marquee {
   from {

@@ -20,7 +20,7 @@ export function Experience() {
         eyebrow="Experience"
         title="Three years, two companies,"
         accent="systems that had to be right."
-        blurb="Financial platforms and multi-surface products — where a duplicate write is a real problem and a slow report costs someone their evening."
+        blurb="Financial platforms and multi-surface products - where a duplicate write is a real problem and a slow report costs someone their evening."
       />
 
       <div ref={ref} className="relative pl-8 md:pl-12">

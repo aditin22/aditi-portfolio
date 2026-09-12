@@ -5,8 +5,8 @@ import type { ReactNode } from 'react'
 /**
  * Only the bottom edge is pulled in, so an entrance fires just before the
  * element rises into view. Trimming the top edge too would mean anything
- * already sitting at the top of the viewport — which is exactly where an
- * anchor jump lands a section — never triggers, leaving it invisible until
+ * already sitting at the top of the viewport - which is exactly where an
+ * anchor jump lands a section - never triggers, leaving it invisible until
  * the visitor happens to scroll.
  */
 export const VIEWPORT_MARGIN = '0px 0px -12% 0px'
@@ -18,7 +18,7 @@ export const VIEWPORT_MARGIN = '0px 0px -12% 0px'
  * The second case is not theoretical: an anchor jump moves the page by
  * thousands of pixels between two frames, so an element can go from below the
  * fold to above it without ever being observed as intersecting. The third
- * covers the trim zone — the bottom 12% is deliberately excluded so entrances
+ * covers the trim zone - the bottom 12% is deliberately excluded so entrances
  * fire a beat early, but whatever sits there when the page is already at its
  * maximum scroll would otherwise wait for a scroll that can never happen.
  * Either way the result is content stuck at opacity 0 for the session.
@@ -51,7 +51,7 @@ function useRevealed(ref: React.RefObject<HTMLElement>) {
     }
   }, [ref, inView, forced])
 
-  // Only a scrolled-past element skips its entrance — nobody is looking at it.
+  // Only a scrolled-past element skips its entrance - nobody is looking at it.
   // A pinned one is on screen, so it still gets the animation.
   return { show: inView || forced !== null, skip: forced === 'past' && !inView }
 }

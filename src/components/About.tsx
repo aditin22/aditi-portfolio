@@ -8,7 +8,7 @@ import { SectionHead } from './SectionHead'
 const EASE = [0.16, 1, 0.3, 1] as const
 const ICONS = { Users, Palette, Mic, Trophy }
 
-/** Counts up with decimals — the grade is 3.99, not 4. */
+/** Counts up with decimals - the grade is 3.99, not 4. */
 function Decimal({ to, places = 2 }: { to: number; places?: number }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: VIEWPORT_MARGIN })
@@ -68,7 +68,7 @@ function GradeDial() {
   )
 }
 
-/** A "#1" medallion — rank as a thing you win, not a line of text. */
+/** A "#1" medallion - rank as a thing you win, not a line of text. */
 function RankMedal() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: VIEWPORT_MARGIN })

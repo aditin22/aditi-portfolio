@@ -16,7 +16,7 @@ const ICONS = {
 const HUES = ['tile-lilac', 'tile-sky', 'tile-mint', 'tile-sand', 'tile-aqua', 'tile-sky']
 
 /**
- * The stack, top to bottom — client layer down to cloud. Each layer says what
+ * The stack, top to bottom - client layer down to cloud. Each layer says what
  * it holds and, more usefully, which shipped project it actually carried, so
  * the list reads as evidence rather than a wall of keywords.
  */
@@ -108,7 +108,7 @@ export function Skills() {
           eyebrow="Toolkit"
           title="The stack I actually"
           accent="ship with."
-          blurb="Six layers, client down to cloud — each one listed with the project it carried in production."
+          blurb="Six layers, client down to cloud - each one listed with the project it carried in production."
         />
 
         <div className="space-y-3.5">

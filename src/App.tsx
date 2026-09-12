@@ -24,7 +24,7 @@ function ArchitectureFallback() {
         eyebrow="System design"
         title="The diagrams behind"
         accent="the bullet points."
-        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside — rendered with React Flow rather than screenshotted."
+        blurb="Drag a node or pan the canvas. These are the two architectures I spent the most time inside - rendered with React Flow rather than screenshotted."
       />
       <div className="h-[440px] w-full animate-pulse rounded-2xl border border-line bg-surface md:h-[500px]" />
     </section>

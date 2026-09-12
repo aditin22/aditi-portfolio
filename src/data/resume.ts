@@ -15,7 +15,7 @@ export const profile = {
    *  with no mail client configured, which is most of them. */
   emailHref:
     'https://mail.google.com/mail/?view=cm&fs=1&to=aditinavhal01%40gmail.com&su=' +
-    encodeURIComponent('Hello Aditi — via your portfolio'),
+    encodeURIComponent('Hello Aditi - via your portfolio'),
   phone: '+91-8769589069',
   linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
   github: 'https://github.com/aditin22',
@@ -54,13 +54,13 @@ export type Role = {
 
 export const experience: Role[] = [
   {
-    company: 'WFYI Technology — FylFlix',
+    company: 'WFYI Technology - FylFlix',
     title: 'Software Engineer',
     location: 'Delhi NCR, India',
-    period: 'Jan 2026 — Present',
+    period: 'Jan 2026 - Present',
     current: true,
     summary:
-      'Own four FylFlix product surfaces end to end — shared design system, auth and RBAC, payments — and built the .NET service that syncs on-premise Tally data to the cloud.',
+      'Own four FylFlix product surfaces end to end - shared design system, auth and RBAC, payments - and built the .NET service that syncs on-premise Tally data to the cloud.',
     caseStudies: ['fylflix', 'tally'],
     projects: [
       {
@@ -104,7 +104,7 @@ export const experience: Role[] = [
     title: 'Software Engineer',
     companyNote: 'Promoted from Associate Software Engineer',
     location: 'Mumbai, Maharashtra',
-    period: 'Jul 2023 — Jan 2026',
+    period: 'Jul 2023 - Jan 2026',
     current: false,
     summary:
       'Modernized a live hedge-fund reconciliation platform from .NET Framework to .NET Core + React, and automated 100+ financial reports for PwC, Carronade and Aurelius.',
@@ -176,7 +176,7 @@ export type CaseStudy = {
   stack: string[]
   problem: string
   owned: string[]
-  /** Horizontal step chains — the architecture the audit asked to see. */
+  /** Horizontal step chains - the architecture the audit asked to see. */
   flows: { title: string; steps: string[] }[]
   challenges: { title: string; body: string }[]
   impact: { value: string; label: string }[]
@@ -191,11 +191,11 @@ export const caseStudies: CaseStudy[] = [
     name: 'FylFlix Platform',
     kicker: 'Production fintech & compliance platform',
     org: 'WFYI Technology',
-    period: 'Jan 2026 — Present',
+    period: 'Jan 2026 - Present',
     accent: 'react',
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'OAuth 2.0', 'JWT', 'Razorpay'],
     problem:
-      'Customer and internal workflows had to run across four surfaces — B2C, B2B, Legal and Admin — on one auth core and one design system, with organization boundaries enforced everywhere.',
+      'Customer and internal workflows had to run across four surfaces - B2C, B2B, Legal and Admin - on one auth core and one design system, with organization boundaries enforced everywhere.',
     owned: [
       'Four frontend applications',
       'Shared UI / design system',
@@ -224,7 +224,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Trust the server, not the client',
-        body: 'Payment state is polled and verified server-side before anything activates, and activation is idempotent — a retried callback can never double-activate a plan.',
+        body: 'Payment state is polled and verified server-side before anything activates, and activation is idempotent - a retried callback can never double-activate a plan.',
       },
       {
         title: 'Organization boundaries',
@@ -249,7 +249,7 @@ export const caseStudies: CaseStudy[] = [
     accent: 'dotnet',
     stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'OAuth 2.0', 'xUnit', 'Serilog'],
     problem:
-      'On-premise TallyPrime data had to reach cloud workflows reliably — 26 entity types, over connectivity that drops, without ever posting a financial entry twice.',
+      'On-premise TallyPrime data had to reach cloud workflows reliably - 26 entity types, over connectivity that drops, without ever posting a financial entry twice.',
     owned: [
       '.NET 10 Windows Service',
       'SQLite-backed local processing',
@@ -301,11 +301,11 @@ export const caseStudies: CaseStudy[] = [
     name: 'RECON',
     kicker: 'Enterprise hedge-fund reconciliation platform',
     org: 'Indus Valley Partners',
-    period: 'Jul 2023 — Jan 2026',
+    period: 'Jul 2023 - Jan 2026',
     accent: 'data',
     stack: ['.NET Core', 'REST APIs', 'React', 'SQL Server', 'Database design', 'SSRS', 'SSIS'],
     problem:
-      'A legacy .NET Framework reconciliation platform that hedge funds close their books on had to be modernized — without disrupting the clients running on it.',
+      'A legacy .NET Framework reconciliation platform that hedge funds close their books on had to be modernized - without disrupting the clients running on it.',
     owned: [
       '.NET Framework → .NET Core migration',
       'REST API layer',
@@ -327,7 +327,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'End to end',
-        body: 'Owned modules from SQL design through .NET Core REST APIs to reusable React components — 10+ production feature releases.',
+        body: 'Owned modules from SQL design through .NET Core REST APIs to reusable React components - 10+ production feature releases.',
       },
       {
         title: 'Reporting accuracy',
@@ -335,7 +335,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Client reporting, alongside',
-        body: '100+ SSRS financial and compliance reports for PwC, Carronade Capital and Aurelius — Taxlot, Gain & Loss, Security Master, liquidity, counterparty, portfolio — with SQL/SSIS ETL cut from ~6 hours to 2.',
+        body: '100+ SSRS financial and compliance reports for PwC, Carronade Capital and Aurelius - Taxlot, Gain & Loss, Security Master, liquidity, counterparty, portfolio - with SQL/SSIS ETL cut from ~6 hours to 2.',
       },
     ],
     impact: [
@@ -352,7 +352,7 @@ export const skills: {
   accent: Accent
   /** lucide icon name */
   icon: string
-  /** Which shipped projects this layer actually carried — taken from the roles above. */
+  /** Which shipped projects this layer actually carried - taken from the roles above. */
   usedIn: string[]
   items: string[]
 }[] = [
@@ -431,14 +431,14 @@ export const education = {
   school: 'Mukesh Patel School of Technology Management & Engineering',
   university: 'NMIMS',
   degree: 'B.Tech, Information Technology',
-  period: '2019 — 2023',
+  period: '2019 - 2023',
   cgpa: 3.99,
   cgpaMax: 4.0,
   rank: 1,
   percentile: 99,
 }
 
-/** Everything outside the code — kept as icon + short label, no prose. */
+/** Everything outside the code - kept as icon + short label, no prose. */
 export const highlights: { icon: string; label: string; detail: string }[] = [
   { icon: 'Users', label: 'Led a team of 3', detail: 'Core application re-architecture' },
   { icon: 'Palette', label: 'Head of Atrangi', detail: 'Art Committee, NMIMS' },

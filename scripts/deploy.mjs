@@ -18,7 +18,7 @@ const DIST = resolve('dist')
 const BRANCH = 'gh-pages'
 
 if (!existsSync(DIST)) {
-  console.error('dist/ not found — run `npm run build` first.')
+  console.error('dist/ not found - run `npm run build` first.')
   process.exit(1)
 }
 

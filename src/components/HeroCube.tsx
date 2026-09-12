@@ -246,8 +246,8 @@ const Y_STEP = [0, -90, -180, -270, -360, -360]
 const X_STEP = [0, 0, 0, 0, -90, -270]
 
 /**
- * Timing. The die opens with a quick tour — four rolls in about three seconds,
- * across both axes — so a visitor sees it turn before they've decided it's a
+ * Timing. The die opens with a quick tour - four rolls in about three seconds,
+ * across both axes - so a visitor sees it turn before they've decided it's a
  * flat card. After that it settles into the slow cadence. A manual pick ends
  * the tour early and restarts the cruise timer.
  */
@@ -261,7 +261,7 @@ const START_DELAY_MS = 700
 export function HeroCube() {
   const reduced = useReducedMotion()
   const stageRef = useRef<HTMLDivElement>(null)
-  // Fire the tour when the die is actually on screen — on phones it sits
+  // Fire the tour when the die is actually on screen - on phones it sits
   // below the fold, and a tour nobody sees is wasted.
   const inView = useInView(stageRef, { once: true, margin: '0px 0px -15% 0px' })
 
