@@ -17,9 +17,9 @@ export function Band() {
           </Reveal>
           <Reveal delay={0.06}>
             <h2 className="t-display text-white">
-              I build the parts that
+              Shipping reliable fintech products
               <br />
-              <span className="t-acc">can't be wrong.</span>
+              <span className="t-acc">— from UI to APIs.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
@@ -27,8 +27,8 @@ export function Band() {
               className="mt-5 max-w-[600px] text-[18px] leading-[1.6]"
               style={{ color: 'rgba(255,255,255,0.75)' }}
             >
-              Payment activation that can't double-charge. Financial sync that can't post twice.
-              Reconciliation a hedge fund closes its books on. The work is mostly in the edges.
+              Payment activation that charges exactly once. Financial sync that posts every entry
+              exactly once. Reconciliation a hedge fund closes its books on. The work is in the edges.
             </p>
           </Reveal>
         </div>
