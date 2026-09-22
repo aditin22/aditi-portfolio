@@ -28,20 +28,35 @@ export function TopBar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Highlight the section currently crossing the upper third of the viewport.
+  // Highlight the last nav section whose top has crossed a probe line a third
+  // of the way down the viewport. Sections are looked up on every pass rather
+  // than observed once, because Architecture is lazy-loaded and swaps its
+  // placeholder node for the real one after mount.
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const hit = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (hit) setActive('#' + hit.target.id)
-      },
-      { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.3] },
-    )
-    LINKS.forEach(({ href }) => {
-      const el = document.querySelector(href)
-      if (el) obs.observe(el)
-    })
-    return () => obs.disconnect()
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const probe = window.innerHeight * 0.35
+      let current = ''
+      for (const { href } of LINKS) {
+        const el = document.getElementById(href.slice(1))
+        if (el && el.getBoundingClientRect().top <= probe) current = href
+      }
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      if (atBottom) current = LINKS[LINKS.length - 1].href
+      setActive(current)
+    }
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
   }, [])
 
   return (
