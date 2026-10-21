@@ -25,8 +25,8 @@ const TILES = [
   {
     kind: 'spark' as const,
     hue: 'tile-sky',
-    title: 'Shipping cadence',
-    note: '25% faster release cycles',
+    title: 'FylFlix service pages',
+    note: '180+ live, none hand-built',
   },
 ]
 
@@ -38,7 +38,7 @@ export function Impact() {
           eyebrow="Measured impact"
           title="The numbers,"
           accent="drawn."
-          blurb="Every figure here is one I own from a shipped system."
+          blurb="Every figure here is one I own from a shipped system - what the product did, and what the engineering did to let it."
         />
 
         <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

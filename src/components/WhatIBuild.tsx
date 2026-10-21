@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion'
-import { Landmark, Layers, ShieldCheck } from 'lucide-react'
+import { Layers, LineChart, Search, ShieldCheck } from 'lucide-react'
 import { whatIBuild } from '../data/resume'
 import { RevealGroup, revealItem } from './Reveal'
 
-const ICONS = { Layers, Landmark, ShieldCheck }
-const HUES = ['tile-sky', 'tile-mint', 'tile-lilac']
+const ICONS = { Search, Layers, ShieldCheck, LineChart }
+const HUES = ['tile-mint', 'tile-sky', 'tile-lilac', 'tile-sand']
 
-/** Three cards that state the professional identity before any detail. */
+/** The four stages of a project, stated before any detail. */
 export function WhatIBuild() {
   return (
     <section className="mx-auto max-w-shell px-6 pb-16 pt-14 md:pb-[68px] md:pt-16">
-      <RevealGroup className="grid gap-4 md:grid-cols-3">
+      <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {whatIBuild.map((w, i) => {
           const Icon = ICONS[w.icon as keyof typeof ICONS] ?? Layers
           return (

@@ -139,13 +139,13 @@ function Study({ cs }: { cs: CaseStudy }) {
 
 export function FeaturedWork() {
   return (
-    <section id="work" className="relative border-y border-line bg-surface2/40">
+    <section id="case-studies" className="relative border-y border-line bg-surface2/40">
       <div className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
         <SectionHead
-          eyebrow="Featured engineering work"
-          title="Systems I've"
-          accent="shipped."
-          blurb="Three production systems, each with the problem, what I owned, and the engineering decisions that made it hold up."
+          eyebrow="Engineering deep dives"
+          title="Three of them,"
+          accent="taken apart."
+          blurb="The same systems again - this time with what I owned line by line, the decisions that made them hold up, and the architecture behind each one."
         />
         <div className="space-y-6">
           {caseStudies.map((cs, i) => (

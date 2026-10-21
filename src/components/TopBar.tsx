@@ -5,9 +5,10 @@ import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 
 const LINKS = [
-  { href: '#work', label: 'Work' },
+  { href: '#work', label: 'Projects' },
   { href: '#experience', label: 'Experience' },
   { href: '#architecture', label: 'Architecture' },
+  { href: '#case-studies', label: 'Deep dives' },
   { href: '#skills', label: 'Skills' },
   { href: '#about', label: 'About' },
   { href: '#contact', label: 'Contact' },
@@ -52,8 +53,14 @@ export function TopBar() {
     update()
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
+    // Lazy chunks and images change section offsets without moving the
+    // scroll position, so no scroll event fires and the highlight would sit
+    // on whatever was correct before the page grew underneath it.
+    const ro = new ResizeObserver(schedule)
+    ro.observe(document.body)
     return () => {
       cancelAnimationFrame(raf)
+      ro.disconnect()
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }

@@ -85,7 +85,7 @@ export function Hero() {
 
           <motion.div variants={rise} className="mt-7 flex flex-nowrap items-center justify-center gap-2.5 md:mt-8 md:gap-3 lg:justify-start">
             <a href="#work" className="btn-white btn-compact">
-              View my work
+              View projects
               <ArrowRight size={16} />
             </a>
             <a

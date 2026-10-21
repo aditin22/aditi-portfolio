@@ -106,9 +106,9 @@ export function Skills() {
       <div className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
         <SectionHead
           eyebrow="Toolkit"
-          title="The stack I actually"
-          accent="ship with."
-          blurb="Six layers, client down to cloud - each one listed with the project it carried in production."
+          title="Everything I actually"
+          accent="work with."
+          blurb="Seven layers, discovery down to cloud - each one listed with the project it carried in production."
         />
 
         <div className="space-y-3.5">

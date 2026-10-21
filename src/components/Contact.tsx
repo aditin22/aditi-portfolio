@@ -34,8 +34,10 @@ export function Contact() {
             className="mx-auto mt-4 max-w-[560px] text-[17px] leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.9)' }}
           >
-            I'm interested in <strong className="font-semibold text-white">Software Engineer / Full-Stack Engineer</strong>{' '}
-            roles involving .NET, React and scalable product development. Email is the fastest way
+            I'm interested in <strong className="font-semibold text-white">Product Manager</strong>,{' '}
+            <strong className="font-semibold text-white">Product Engineer</strong> and{' '}
+            <strong className="font-semibold text-white">Full-Stack Engineer</strong> roles - the ones
+            where owning the problem and shipping the code are the same job. Email is the fastest way
             to reach me.
           </p>
         </Reveal>

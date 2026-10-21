@@ -12,14 +12,14 @@ export function Band() {
         <div className="min-w-0">
           <Reveal>
             <span className="t-eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              Meet the engineer
+              How I work
             </span>
           </Reveal>
           <Reveal delay={0.06}>
             <h2 className="t-display text-white">
-              Shipping reliable fintech products
+              I write the PRD
               <br />
-              <span className="t-acc">— from UI to APIs.</span>
+              <span className="t-acc">— and then I ship it.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
@@ -27,8 +27,9 @@ export function Band() {
               className="mt-5 max-w-[600px] text-[18px] leading-[1.6]"
               style={{ color: 'rgba(255,255,255,0.75)' }}
             >
-              Payment activation that charges exactly once. Financial sync that posts every entry
-              exactly once. Reconciliation a hedge fund closes its books on. The work is in the edges.
+              Discovery with the people who will use it, requirements written down with the
+              deferrals made explicit, then the code: payment activation that charges exactly once,
+              financial sync that posts every entry exactly once. The work is in the edges.
             </p>
           </Reveal>
         </div>

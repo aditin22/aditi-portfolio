@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight, Briefcase, ChevronDown, MapPin, TrendingUp } from 'lucide-react'
-import { caseStudies, experience, type Role } from '../data/resume'
+import { experience, projects, type Role } from '../data/resume'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 
@@ -18,9 +18,9 @@ export function Experience() {
     <section id="experience" className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
       <SectionHead
         eyebrow="Experience"
-        title="Three years, two companies,"
-        accent="systems that had to be right."
-        blurb="Financial platforms and multi-surface products - where a duplicate write is a real problem and a slow report costs someone their evening."
+        title="Three years, three companies,"
+        accent="and both sides of the table."
+        blurb="Writing the requirements and then writing the code - fintech, legaltech and industrial B2B, where a duplicate write is a real problem and a slow report costs someone their evening."
       />
 
       <div ref={ref} className="relative pl-8 md:pl-12">
@@ -76,19 +76,19 @@ export function Experience() {
 
                 <div className="mt-3 flex flex-wrap gap-2">
                   {role.caseStudies.map((id) => {
-                    const cs = caseStudies.find((c) => c.id === id)
+                    const cs = projects.find((c) => c.id === id)
                     if (!cs) return null
                     return (
                       <a
                         key={id}
-                        href={`#case-${id}`}
+                        href={`#project-${id}`}
                         className="group inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12.5px] font-semibold transition-colors"
                         style={{
                           background: `color-mix(in srgb, var(--${cs.accent}) 14%, transparent)`,
                           color: `var(--${cs.accent}-text)`,
                         }}
                       >
-                        {cs.name} case study
+                        {cs.name}
                         <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
                       </a>
                     )

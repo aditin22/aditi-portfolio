@@ -8,6 +8,7 @@ import { Impact } from './components/Impact'
 import { Band } from './components/Band'
 import { Stats } from './components/Stats'
 import { FeaturedWork } from './components/FeaturedWork'
+import { Projects } from './components/Projects'
 import { WhatIBuild } from './components/WhatIBuild'
 import { Skills } from './components/Skills'
 import { TopBar } from './components/TopBar'
@@ -45,13 +46,14 @@ export default function App() {
         <Hero />
         <Stats />
         <WhatIBuild />
-        <FeaturedWork />
+        <Projects />
         <Experience />
         <Impact />
         <Band />
         <Suspense fallback={<ArchitectureFallback />}>
           <Architecture />
         </Suspense>
+        <FeaturedWork />
         <Skills />
         <About />
         <Contact />
