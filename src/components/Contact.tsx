@@ -36,9 +36,8 @@ export function Contact() {
           >
             I'm interested in <strong className="font-semibold text-white">Product Manager</strong>,{' '}
             <strong className="font-semibold text-white">Product Engineer</strong> and{' '}
-            <strong className="font-semibold text-white">Full-Stack Engineer</strong> roles - the ones
-            where owning the problem and shipping the code are the same job. Email is the fastest way
-            to reach me.
+            <strong className="font-semibold text-white">Full-Stack Engineer</strong> roles. Email is
+            the fastest way to reach me.
           </p>
         </Reveal>
 

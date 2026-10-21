@@ -17,9 +17,9 @@ export function Band() {
           </Reveal>
           <Reveal delay={0.06}>
             <h2 className="t-display text-white">
-              I write the PRD
+              Requirements and code,
               <br />
-              <span className="t-acc">— and then I ship it.</span>
+              <span className="t-acc">written by the same person.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>

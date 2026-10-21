@@ -18,9 +18,9 @@ export function Experience() {
     <section id="experience" className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
       <SectionHead
         eyebrow="Experience"
-        title="Three years, three companies,"
-        accent="and both sides of the table."
-        blurb="Writing the requirements and then writing the code - fintech, legaltech and industrial B2B, where a duplicate write is a real problem and a slow report costs someone their evening."
+        title="Where the work"
+        accent="happened."
+        blurb="Two companies and one freelance engagement, across fintech, legaltech and industrial B2B, where a duplicate write is a real problem and a slow report costs someone their evening."
       />
 
       <div ref={ref} className="relative pl-8 md:pl-12">
@@ -52,6 +52,11 @@ export function Experience() {
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11.5px] font-medium text-ink-2">
                       <span className="live-dot" />
                       Current
+                    </span>
+                  )}
+                  {role.kind && (
+                    <span className="rounded-full border border-line px-2.5 py-1 text-[11.5px] font-medium text-ink-3">
+                      {role.kind}
                     </span>
                   )}
                 </div>

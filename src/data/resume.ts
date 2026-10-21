@@ -7,7 +7,7 @@ export const profile = {
   /** The two halves, named. Rendered as the hero's stack rail. */
   tagline: ['Discovery & PRDs', 'Roadmap', 'React / Next.js', 'C# / .NET', 'SQL'],
   positioning:
-    'I write the PRD and then I ship it. Three years across fintech, legaltech and industrial B2B - customer journeys, prioritisation and unit economics on one side; React, .NET and SQL on the other.',
+    'Three years across fintech, legaltech and industrial B2B. I run the discovery and write the requirements, then build the product in React, Next.js, C# and SQL.',
   years: 3,
   /** Served from public/; resolved against the Vite base at render time. */
   resumeFile: 'Aditi_Navhal_Resume.pdf',
@@ -22,7 +22,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
   github: 'https://github.com/aditin22',
   summary:
-    'Product-focused engineer with 3 years across fintech, legaltech and industrial B2B. I run discovery with stakeholders, author the PRDs and BRDs, own the roadmap - and then build the thing in React, Next.js, TypeScript and C#/.NET over SQL Server and PostgreSQL. Shipped a 0-to-1 buyer platform, a four-surface services platform that reached 500+ sign-ups in one filing season, an offline-to-cloud financial sync service, and a hedge-fund reconciliation platform modernisation.',
+    'Product-focused engineer with 3 years across fintech, legaltech and industrial B2B. I run discovery with stakeholders, author the PRDs and BRDs and own the roadmap, then build in React, Next.js, TypeScript and C#/.NET over SQL Server and PostgreSQL. Shipped a 0-to-1 buyer platform as a freelance engagement, a four-surface services platform that reached 500+ sign-ups in one filing season, an offline-to-cloud financial sync service, and a hedge-fund reconciliation platform modernisation.',
 }
 
 /** Six figures: three product outcomes, three engineering ones. */
@@ -81,10 +81,10 @@ export const projects: Project[] = [
     index: '01',
     name: 'UrjaSetu BioEnergy',
     kicker: '0-to-1 buyer platform for industrial biomass fuel',
-    org: 'Client project',
+    org: 'Freelance',
     period: 'Sep 2026 - Present',
     accent: 'data',
-    hat: 'Product Manager',
+    hat: 'Product + build',
     split: { product: 70, engineering: 30 },
     problem:
       'Factories across Delhi NCR buy boiler fuel over WhatsApp and phone calls - no published specifications, no comparable pricing, and no way to tell a real supplier from a broker reselling someone else’s stock.',
@@ -94,7 +94,7 @@ export const projects: Project[] = [
       'Shipped the first version for client review in October and folded their feedback straight back in; they now demo it to existing buyers ahead of an IndiaMART and Google launch. 15+ analytics events instrument quotes, recommendations, calculator runs and contacts.',
     links: [
       { label: 'Live site', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' },
-      { label: 'Repo is private - client project', href: '', kind: 'internal' },
+      { label: 'Repo is private, client work', href: '', kind: 'internal' },
     ],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
   },
@@ -133,9 +133,9 @@ export const projects: Project[] = [
     problem:
       'Component libraries look right and fall apart the moment you unplug the mouse. The hard problems in a design system are focus management, keyboard navigation and ARIA relationships that stay correct as content changes.',
     did:
-      'Built 12 components with no headless-UI dependency - no Radix, no react-aria - implementing the focus trap, roving tabindex, typeahead, scroll lock and inert handling myself and exporting them as hooks, on a two-layer token system where dark mode redefines only the semantic layer.',
+      'Built 12 components with no headless-UI dependency, writing the focus trap, roving tabindex, typeahead, scroll lock and inert handling myself and exporting them as hooks, on a two-layer token system where dark mode redefines only the semantic layer.',
     happened:
-      'axe-core runs against every story and fails CI rather than filling a warning panel nobody reads. 16.3 kB brotli, ESM-only and correctly externalised, with every interaction test a story you can open and watch replay.',
+      'axe-core runs against every story and fails CI, so an accessibility regression blocks the build instead of landing. 16.3 kB brotli, ESM-only and correctly externalised, with every interaction test a story you can open and watch replay.',
     links: [
       { label: 'Live Storybook', href: 'https://aditin22.github.io/aurora-ui/storybook/', kind: 'demo' },
       { label: 'GitHub repo', href: 'https://github.com/aditin22/aurora-ui', kind: 'repo' },
@@ -191,6 +191,8 @@ export const projects: Project[] = [
 export type Role = {
   company: string
   companyNote?: string
+  /** Shown as a neutral chip where the engagement is not a staff role. */
+  kind?: string
   title: string
   location: string
   period: string
@@ -211,12 +213,13 @@ export type Role = {
 export const experience: Role[] = [
   {
     company: 'UrjaSetu BioEnergy',
-    title: 'Product Manager (client project)',
+    title: 'Product manager and developer',
+    kind: 'Freelance',
     location: 'Delhi NCR, India',
     period: 'Sep 2026 - Present',
     current: true,
     summary:
-      'Embedded with the client to take a biomass-fuel buyer platform from discovery to production - stakeholder interviews, PRDs and BRDs, the roadmap, and the quote funnel itself, with a 2-person engineering team.',
+      'A freelance engagement taking a biomass-fuel buyer platform from discovery to production: stakeholder interviews, PRDs and BRDs, the roadmap, and the quote funnel itself, with a 2-person engineering team.',
     caseStudies: ['urjasetu'],
     projects: [
       {

@@ -195,7 +195,7 @@ export function Projects() {
           eyebrow="Selected work"
           title="Five projects."
           accent="The problem, my part, the outcome, the link."
-          blurb="Two I led as product and built as an engineer, one I open-sourced, two that run inside financial institutions. Same four questions each time."
+          blurb="A freelance platform taken from discovery to launch, a services platform owned at work, an open-source library, and two systems running inside financial institutions. The same four questions for each."
         />
 
         <Reveal>
@@ -208,8 +208,8 @@ export function Projects() {
               <Github size={13} aria-hidden="true" /> {repos} open-source repository
             </span>
             <span className="text-ink-3">
-              Client and employer code stays private - where there is no repository to show, there
-              is a live product or an interactive architecture diagram instead.
+              Client and employer code stays private. Where there is no repository to show, there is
+              a live product or an interactive architecture diagram instead.
             </span>
           </p>
         </Reveal>

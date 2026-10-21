@@ -145,7 +145,7 @@ export function FeaturedWork() {
           eyebrow="Engineering deep dives"
           title="Three of them,"
           accent="taken apart."
-          blurb="The same systems again - this time with what I owned line by line, the decisions that made them hold up, and the architecture behind each one."
+          blurb="The same systems again, this time with what I owned line by line, the decisions that made them hold up, and the architecture behind each one."
         />
         <div className="space-y-6">
           {caseStudies.map((cs, i) => (
