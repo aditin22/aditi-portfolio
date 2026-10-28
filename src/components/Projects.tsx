@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Building2, Calendar, Github, Lock, Network } from 'lucide-react'
+import { ArrowUpRight, Building2, Calendar, Github, GraduationCap, Lock, Network } from 'lucide-react'
 import { projects, type Project, type ProjectLink } from '../data/resume'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
@@ -118,7 +118,7 @@ function Card({ p }: { p: Project }) {
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12.5px] text-ink-3">
             <span className="inline-flex items-center gap-1.5">
-              <Building2 size={12.5} aria-hidden="true" /> {p.org}
+              {p.id === 'urjasetu' ? <GraduationCap size={12.5} aria-hidden="true" /> : <Building2 size={12.5} aria-hidden="true" />} {p.org}
             </span>
             <span className="inline-flex items-center gap-1.5 font-mono">
               <Calendar size={12.5} aria-hidden="true" /> {p.period}
@@ -194,8 +194,8 @@ export function Projects() {
         <SectionHead
           eyebrow="Selected work"
           title="Five projects."
-          accent="The problem, my part, the outcome, the link."
-          blurb="A freelance platform taken from discovery to launch, a services platform owned at work, an open-source library, and two systems running inside financial institutions. The same four questions for each."
+          accent="User needs, product decisions, implementation and outcomes."
+          blurb="Three from my roles at FylFlix and IVP, then two built on my own time: UrjaSetu, a product I am building end to end to keep sharpening both skills, and Aurora UI, an open-source component library."
         />
 
         <Reveal>
@@ -208,8 +208,9 @@ export function Projects() {
               <Github size={13} aria-hidden="true" /> {repos} open-source repository
             </span>
             <span className="text-ink-3">
-              Client and employer code stays private. Where there is no repository to show, there is
-              a live product or an interactive architecture diagram instead.
+              Employer code stays private, so work projects link to the live product or an interactive
+              architecture diagram. Both personal projects have live demos, and Aurora UI has its source
+              on GitHub.
             </span>
           </p>
         </Reveal>

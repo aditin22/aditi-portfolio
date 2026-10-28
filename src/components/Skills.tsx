@@ -1,10 +1,13 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Cloud, Database, FlaskConical, MonitorSmartphone, Server, ShieldCheck } from 'lucide-react'
+import { ClipboardCheck, Cloud, Compass, Database, FlaskConical, LineChart, MonitorSmartphone, Server, ShieldCheck } from 'lucide-react'
 import { skills } from '../data/resume'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 
 const ICONS = {
+  Compass,
+  ClipboardCheck,
+  LineChart,
   Server,
   MonitorSmartphone,
   Database,
@@ -79,7 +82,7 @@ function Layer({ g, i }: { g: (typeof skills)[number]; i: number }) {
             </ul>
 
             <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-ink-3">
-              <span className="font-mono uppercase tracking-[1.2px] text-ink-4">Shipped in</span>
+              <span className="font-mono uppercase tracking-[1.2px] text-ink-4">Applied in</span>
               {g.usedIn.map((p) => (
                 <span
                   key={p}
@@ -108,7 +111,7 @@ export function Skills() {
           eyebrow="Toolkit"
           title="What I"
           accent="work with."
-          blurb="Seven layers, discovery down to cloud, each listed with the project it carried in production."
+          blurb="Product discovery, prioritization and analytics alongside frontend, backend and data skills. Each layer lists the projects it was used in."
         />
 
         <div className="space-y-3.5">

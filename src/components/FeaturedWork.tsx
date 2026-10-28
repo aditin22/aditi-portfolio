@@ -85,7 +85,7 @@ function Study({ cs }: { cs: CaseStudy }) {
 
         <div>
           <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">
-            Engineering challenges
+            Decisions & implementation
           </h4>
           <ul className="mt-2.5 space-y-3.5">
             {cs.challenges.map((c) => (
@@ -142,10 +142,10 @@ export function FeaturedWork() {
     <section id="case-studies" className="relative border-y border-line bg-surface2/40">
       <div className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
         <SectionHead
-          eyebrow="Engineering deep dives"
+          eyebrow="Product & engineering deep dives"
           title="Three of them,"
           accent="taken apart."
-          blurb="The same systems again, this time with what I owned line by line, the decisions that made them hold up, and the architecture behind each one."
+          blurb="How user workflows shaped scope, how product rules became technical decisions, and what I delivered across the interface, services and data."
         />
         <div className="space-y-6">
           {caseStudies.map((cs, i) => (

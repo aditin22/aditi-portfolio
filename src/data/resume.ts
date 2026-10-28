@@ -7,7 +7,7 @@ export const profile = {
   /** The two halves, named. Rendered as the hero's stack rail. */
   tagline: ['Discovery & PRDs', 'Roadmap', 'React / Next.js', 'C# / .NET', 'SQL'],
   positioning:
-    'Three years across fintech, legaltech and industrial B2B. I run the discovery and write the requirements, then build the product in React, Next.js, C# and SQL.',
+    'Three years across fintech and legaltech, on both sides of the product. I run customer conversations, write the PRDs and own the roadmap, and I build in React, Next.js, C# and SQL.',
   years: 3,
   /** Served from public/; resolved against the Vite base at render time. */
   resumeFile: 'Aditi_Navhal_Resume.pdf',
@@ -22,17 +22,17 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
   github: 'https://github.com/aditin22',
   summary:
-    'Product-focused engineer with 3 years across fintech, legaltech and industrial B2B. I run discovery with stakeholders, author the PRDs and BRDs and own the roadmap, then build in React, Next.js, TypeScript and C#/.NET over SQL Server and PostgreSQL. Shipped a 0-to-1 buyer platform as a freelance engagement, a four-surface services platform that reached 500+ sign-ups in one filing season, an offline-to-cloud financial sync service, and a hedge-fund reconciliation platform modernisation.',
+    'Engineer turned product manager, three years across fintech and legaltech. At FylFlix I owned product decisions with the founders, built the roadmap from 100+ customer conversations and led a team of up to 10, while building the React/Next.js platform, authentication and payments; it reached 500+ ITR sign-ups and 380+ paid filings in one season. At IVP I worked client-facing with Aurelius Capital and led a 3 to 4 person .NET and React re-architecture. UrjaSetu is a personal project I am building end to end to keep sharpening both skills.',
 }
 
-/** Six figures: three product outcomes, three engineering ones. */
+/** Professional outcomes only: three from the product side, three from the build. */
 export const stats = [
-  { value: 3, suffix: '', label: 'Years shipping products' },
-  { value: 500, suffix: '+', label: 'Sign-ups in one filing season' },
+  { value: 100, suffix: '+', label: 'Customer conversations behind a roadmap' },
+  { value: 500, suffix: '+', label: 'ITR sign-ups in one filing season' },
+  { value: 380, suffix: '+', label: 'Paid filings in the same season' },
   { value: 180, suffix: '+', label: 'Service pages launched' },
   { value: 100, suffix: '+', label: 'Financial reports automated' },
   { value: 26, suffix: '', label: 'Tally entities synchronized' },
-  { value: 15, suffix: '+', label: 'Analytics events specified' },
 ]
 
 /* ────────────────────────────────────────────────────────────────────────────
@@ -77,43 +77,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: 'urjasetu',
-    index: '01',
-    name: 'UrjaSetu BioEnergy',
-    kicker: '0-to-1 buyer platform for industrial biomass fuel',
-    org: 'Freelance',
-    period: 'Sep 2026 - Present',
-    accent: 'data',
-    hat: 'Product + build',
-    split: { product: 70, engineering: 30 },
-    problem:
-      'Factories across Delhi NCR buy boiler fuel over WhatsApp and phone calls - no published specifications, no comparable pricing, and no way to tell a real supplier from a broker reselling someone else’s stock.',
-    did:
-      'Ran discovery into the client’s offline sales process, authored the PRDs and BRDs, owned the roadmap with a 2-person engineering team, and designed the funnel myself: a 4-question Fuel Finder, a fuel-switch calculator and a supplier checklist that all feed one context-prefilled quote form.',
-    happened:
-      'Shipped the first version for client review in October and folded their feedback straight back in; they now demo it to existing buyers ahead of an IndiaMART and Google launch. 15+ analytics events instrument quotes, recommendations, calculator runs and contacts.',
-    links: [
-      { label: 'Live site', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' },
-      { label: 'Repo is private, client work', href: '', kind: 'internal' },
-    ],
-    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
-  },
-  {
     id: 'fylflix',
-    index: '02',
+    index: '01',
     name: 'FylFlix',
-    kicker: 'Legal, tax and finance services platform - four surfaces, one core',
+    kicker: 'Legal, tax and finance services platform, four surfaces on one core',
     org: 'WFYI Technology',
     period: 'Jan 2026 - Aug 2026',
     accent: 'react',
     hat: 'Product owner + full-stack',
-    split: { product: 45, engineering: 55 },
+    split: { product: 55, engineering: 45 },
     problem:
-      'One company selling legal, tax and finance services to four different kinds of customer, on four separate surfaces - and every new service page was hand-built by an engineer.',
+      'One company selling legal, tax and finance services to four different kinds of customer, on four separate surfaces, and every new service page was hand-built by an engineer.',
     did:
-      'Defined the customer journeys for four user segments, authored the PRDs and BRDs and led a 5 to 7 person cross-functional group - then built the shared React/Next.js design system, the OAuth 2.0 + JWT auth core, multi-organization RBAC and the Razorpay checkout, plus a configuration-driven page template non-engineers could use.',
+      'Built the roadmap from 100+ customer conversations, cut the staff admin MVP to 4 roles with MoSCoW and led a team of up to 10 across engineering, QA, marketing and social. Then built the shared React/Next.js design system, the OAuth 2.0 + JWT auth core, multi-organization RBAC, the Razorpay checkout and a configuration-driven page template.',
     happened:
-      '500+ ITR sign-ups in one filing season, 12 business clients on the finance suite, and 180+ public service pages live - new ones now ship without any engineering work at all.',
+      '500+ ITR sign-ups and 380+ paid filings in one filing season, 12 business and 7+ legal clients, about a 25% lift in checkout conversion from discount codes in A/B tests, and 180+ service pages live with no further engineering work.',
     links: [
       { label: 'Live product', href: 'https://fylflix.com', kind: 'demo' },
       { label: 'Architecture walkthrough', href: '#architecture', kind: 'case' },
@@ -121,8 +99,71 @@ export const projects: Project[] = [
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'OAuth 2.0', 'JWT', 'Razorpay'],
   },
   {
-    id: 'aurora',
+    id: 'tally',
+    index: '02',
+    name: 'Tally Connector',
+    kicker: 'Offline-to-cloud financial synchronization service',
+    org: 'WFYI Technology',
+    period: '2026',
+    accent: 'dotnet',
+    hat: 'Engineering + launch',
+    split: { product: 25, engineering: 75 },
+    problem:
+      'On-premise TallyPrime data had to reach cloud workflows across 26 entity types, over office connectivity that drops, without ever posting a financial entry twice.',
+    did:
+      'Built a .NET 10 / C# Windows Service that stages every change in SQLite first, delta-syncs only what moved to AWS S3 and PostgreSQL, and makes each write-back idempotent behind reconciliation checks. Then led its go-to-market alongside the ITR filing season.',
+    happened:
+      '20 installs in its first week, and no duplicate postings: a retry after a dropped connection re-sends the same work without charging the books twice.',
+    links: [
+      { label: 'Interactive architecture', href: '#architecture', kind: 'case' },
+      { label: 'Source is employer-owned', href: '', kind: 'internal' },
+    ],
+    stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'xUnit'],
+  },
+  {
+    id: 'recon',
     index: '03',
+    name: 'RECON',
+    kicker: 'Hedge-fund reconciliation platform, modernised in place',
+    org: 'Indus Valley Partners',
+    period: 'Jul 2023 - Dec 2025',
+    accent: 'data',
+    hat: 'Team lead + client-facing',
+    split: { product: 35, engineering: 65 },
+    problem:
+      'A legacy .NET Framework platform that hedge funds close their books on had to be modernised while it stayed in production for the clients running on it.',
+    did:
+      'Ran requirement calls, demos, UAT and root-cause analysis on data breaks with Aurelius Capital Management, and wrote the user stories with acceptance criteria. As lead of a 3 to 4 person team, took the platform to .NET Core with a React front end and decided when each release was ready for production.',
+    happened:
+      '30% performance gain, 25% faster releases and 10+ production features. Alongside it, 100+ SSRS financial and compliance reports automated for PwC, Carronade and Aurelius, with a key workflow cut from about 6 hours to 2.',
+    links: [
+      { label: 'Case study', href: '#case-recon', kind: 'case' },
+      { label: 'Enterprise product, no public repo', href: '', kind: 'internal' },
+    ],
+    stack: ['.NET Core', 'C#', 'React', 'SQL Server', 'SSRS', 'SSIS', 'Azure DevOps'],
+  },
+  {
+    id: 'urjasetu',
+    index: '04',
+    name: 'UrjaSetu BioEnergy',
+    kicker: 'A buyer platform for industrial biomass fuel, built end to end',
+    org: 'Personal project',
+    period: 'Sep 2026 - Present',
+    accent: 'data',
+    hat: 'Product + build',
+    split: { product: 50, engineering: 50 },
+    problem:
+      'Factories across Delhi NCR buy boiler fuel over phone calls and WhatsApp, with no published specifications and no easy way to compare one supplier’s quote against another’s.',
+    did:
+      'Defined the requirements and built the whole journey in Next.js and TypeScript: a 4-question Fuel Finder, a fuel-switch calculator and a supplier checklist that ranks quotes on delivered cost, each passing its context into one quote form, plus an admin dashboard for incoming leads.',
+    happened:
+      'A working demo is live and still growing. The site never shows a number it cannot prove, so the calculator gives an energy-equivalent range with its assumptions visible instead of promising savings, and 16 tracked events behind a consent banner measure the funnel from first question to submitted quote.',
+    links: [{ label: 'Live demo', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' }],
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+  },
+  {
+    id: 'aurora',
+    index: '05',
     name: 'Aurora UI',
     kicker: 'Accessible React component library, built from scratch',
     org: 'Open source - MIT',
@@ -142,57 +183,11 @@ export const projects: Project[] = [
     ],
     stack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Vite', 'Storybook', 'axe-core'],
   },
-  {
-    id: 'tally',
-    index: '04',
-    name: 'Tally Connector',
-    kicker: 'Offline-to-cloud financial synchronization service',
-    org: 'WFYI Technology',
-    period: '2026',
-    accent: 'dotnet',
-    hat: 'Engineering',
-    split: { product: 15, engineering: 85 },
-    problem:
-      'On-premise TallyPrime data had to reach cloud workflows across 26 entity types, over office connectivity that drops - without ever posting a financial entry twice.',
-    did:
-      'Built a .NET 10 / C# Windows Service that stages every change in SQLite first, delta-syncs only what moved to AWS S3 and PostgreSQL, and makes each write-back idempotent behind reconciliation checks, with encrypted secrets, structured logging and an xUnit suite over the sync paths.',
-    happened:
-      '20 installs in its first week, and no duplicate postings - a retry after a dropped connection re-sends the same work without charging the books twice.',
-    links: [
-      { label: 'Interactive architecture', href: '#architecture', kind: 'case' },
-      { label: 'Source is employer-owned', href: '', kind: 'internal' },
-    ],
-    stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'xUnit'],
-  },
-  {
-    id: 'recon',
-    index: '05',
-    name: 'RECON',
-    kicker: 'Hedge-fund reconciliation platform, modernised in place',
-    org: 'Indus Valley Partners',
-    period: 'Jul 2023 - Dec 2025',
-    accent: 'data',
-    hat: 'Engineering + client-facing',
-    split: { product: 25, engineering: 75 },
-    problem:
-      'A legacy .NET Framework platform that hedge funds close their books on had to be modernised - while it stayed in production for the clients running on it.',
-    did:
-      'Led a 3 to 4 person team through the migration to .NET Core with a React front end, delivering 10+ production features end to end - SQL Server schema and indexing, .NET Core Web APIs, React components - and sat directly with Aurelius Capital Management translating their reconciliation problems into the backlog.',
-    happened:
-      '30% faster, 25% quicker release cycles. Alongside it, 100+ SSRS financial and compliance reports automated for PwC, Carronade and Aurelius, with a key ETL workflow cut from roughly 6 hours to 2.',
-    links: [
-      { label: 'Case study', href: '#case-recon', kind: 'case' },
-      { label: 'Enterprise product - no public repo', href: '', kind: 'internal' },
-    ],
-    stack: ['.NET Core', 'C#', 'React', 'SQL Server', 'SSRS', 'SSIS', 'T-SQL'],
-  },
 ]
 
 export type Role = {
   company: string
   companyNote?: string
-  /** Shown as a neutral chip where the engagement is not a staff role. */
-  kind?: string
   title: string
   location: string
   period: string
@@ -212,44 +207,13 @@ export type Role = {
 
 export const experience: Role[] = [
   {
-    company: 'UrjaSetu BioEnergy',
-    title: 'Product manager and developer',
-    kind: 'Freelance',
-    location: 'Delhi NCR, India',
-    period: 'Sep 2026 - Present',
-    current: true,
-    summary:
-      'A freelance engagement taking a biomass-fuel buyer platform from discovery to production: stakeholder interviews, PRDs and BRDs, the roadmap, and the quote funnel itself, with a 2-person engineering team.',
-    caseStudies: ['urjasetu'],
-    projects: [
-      {
-        name: 'UrjaSetu Platform',
-        subtitle: '0-to-1 industrial buyer journey',
-        accent: 'data',
-        metrics: [
-          { value: '12', label: 'NCR industrial hubs' },
-          { value: '15+', label: 'analytics events' },
-          { value: '4', label: 'question Fuel Finder' },
-          { value: 'Live', label: 'client-facing' },
-        ],
-        bullets: [
-          'Led discovery, PRDs/BRDs and the roadmap for a 0-to-1 biomass fuel buyer platform targeting 12 NCR industrial hubs, working with a 2-person engineering team.',
-          'Designed a quote-generation journey connecting a 4-question Fuel Finder, a fuel-switch calculator and a supplier checklist to a context-prefilled inquiry form.',
-          'Prioritised conservative fuel-equivalence estimates over unverified savings claims so buyers could trust the numbers, and built market-sizing and unit-economics models to inform pricing.',
-          'Shipped the first version for client review in October and incorporated their feedback; the client now shows it to existing buyers ahead of an IndiaMART and Google launch.',
-          'Specified 15+ analytics events to measure the funnel across quotes, recommendations, calculator use and contacts.',
-        ],
-      },
-    ],
-  },
-  {
     company: 'WFYI Technology - FylFlix',
     title: 'Software Engineer (Product Ownership)',
     location: 'Delhi NCR, India',
     period: 'Jan 2026 - Aug 2026',
     current: false,
     summary:
-      'Owned both the product and the engineering across four FylFlix surfaces - customer journeys, PRDs and a 5 to 7 person cross-functional group on one side; the shared design system, auth core, RBAC and payments on the other.',
+      'Owned product decisions with the founders and built much of what shipped: the roadmap, PRDs, sprints and the go/no-go call on one side; the shared UI, authentication and payments on the other.',
     caseStudies: ['fylflix', 'tally'],
     projects: [
       {
@@ -258,17 +222,19 @@ export const experience: Role[] = [
         accent: 'react',
         metrics: [
           { value: '500+', label: 'ITR sign-ups' },
+          { value: '380+', label: 'paid filings' },
+          { value: '~25%', label: 'checkout lift (A/B)' },
           { value: '180+', label: 'service pages' },
-          { value: '12', label: 'business clients' },
-          { value: '100+', label: 'B2B services' },
         ],
         bullets: [
-          'Defined distinct customer journeys for four user segments across legal, tax and finance, including the end-to-end Talk to Lawyer flow from intake and consultation booking through to Razorpay payment.',
-          'Replaced per-page development with a reusable, data-driven template, launching 180+ public service pages and letting non-engineers add new ones without further engineering work.',
-          'Owned development across four product surfaces, building reusable React/Next.js components and a shared design system in TypeScript, Radix UI and Tailwind CSS.',
-          'Integrated Razorpay payments and subscriptions with polling-based verification, idempotent activation, configurable plans and GST invoice workflows.',
-          'Designed shared authentication and workspace flows using OAuth 2.0, JWT, Google OAuth, secure callbacks and refresh-token handling, with multi-organization RBAC.',
-          'Scoped a staff admin MVP for 4 roles with the founders, deferring 13 lower-priority features with explicit triggers for revisiting each, such as funnel analytics at 500+ users.',
+          'Owned product decisions with the founders, leading a team of up to 10 across engineering, QA, marketing and social, and built the roadmap from 100+ customer conversations.',
+          'Prioritised with MoSCoW: cut the staff admin MVP to 4 roles and deferred 13 features, each with a written trigger for revisiting it, such as funnel analytics at 500+ users.',
+          'Wrote PRDs, BRDs, user stories and acceptance criteria; wireframed flows in Figma and Google Stitch; ran sprints in Jira and Notion and led UAT through to the go/no-go call.',
+          'Chose WhatsApp over a portal for invoice collection, and bounded the Gemini tax projection to two outputs.',
+          'Owned monetization: discount codes lifted checkout conversion about 25% in A/B tests. Tracked the funnel from sign-up to paid filing, and user retention, in Google Analytics and Mixpanel.',
+          'Replaced per-page development with a reusable, data-driven template, launching 180+ public service pages that non-engineers can add to without engineering work.',
+          'Built reusable React/Next.js components and a shared design system in TypeScript, Radix UI and Tailwind CSS across four product surfaces.',
+          'Integrated Razorpay payments and subscriptions with polling-based verification, idempotent activation and GST invoices, on a shared OAuth 2.0 / JWT auth core with multi-organization RBAC.',
         ],
       },
       {
@@ -282,7 +248,7 @@ export const experience: Role[] = [
           { value: 'xUnit', label: 'automated tests' },
         ],
         bullets: [
-          'Built a .NET 10 / C# Windows Service synchronizing data across 26 TallyPrime entities with AWS S3 and PostgreSQL-based cloud workflows, reaching 20 installs in its first week.',
+          'Built a .NET 10 / C# Windows Service synchronizing data across 26 TallyPrime entities with AWS S3 and PostgreSQL-based cloud workflows, then led its go-to-market with the ITR season: 20 installs in its first week.',
           'Designed durable delta-sync and idempotent write-back mechanisms using SQLite-backed processing and reconciliation safeguards to prevent duplicate financial postings.',
           'Secured the service using OAuth 2.0 client credentials, encrypted secrets, secure IPC, structured logging and automated xUnit testing.',
         ],
@@ -297,7 +263,7 @@ export const experience: Role[] = [
     period: 'Jul 2023 - Dec 2025',
     current: false,
     summary:
-      'Modernized a live hedge-fund reconciliation platform from .NET Framework to .NET Core + React, led a 3 to 4 person team, and automated 100+ financial reports for PwC, Carronade and Aurelius.',
+      'Client-facing with Aurelius Capital on a hedge-fund reconciliation platform: requirement calls, demos and UAT on one side, leading a 3 to 4 person team through the .NET Core and React re-architecture on the other.',
     caseStudies: ['recon'],
     projects: [
       {
@@ -310,8 +276,9 @@ export const experience: Role[] = [
           { value: '10+', label: 'feature releases' },
         ],
         bullets: [
+          'Ran requirement calls, demos, UAT and root-cause analysis on data breaks with Aurelius Capital Management, translating their reconciliation issues into the backlog.',
+          'Wrote user stories with acceptance criteria for BAs and engineers, planned sprints in Azure DevOps and Jira, and as team lead decided release readiness through QA to production.',
           'Led a 3 to 4 member team migrating RECON, an ML-assisted reconciliation platform, from .NET Framework to .NET Core, delivering 10+ production features and 25% faster release cycles.',
-          'Partnered with Aurelius Capital Management on hedge-fund reconciliation and reporting workflows, translating client requirements and operational issues into product improvements.',
           'Developed end-to-end modules across SQL database design, .NET Core REST APIs and reusable React components.',
           'Conducted peer code reviews and mentored junior team members while collaborating with QA, product and client-facing teams.',
         ],
@@ -339,8 +306,8 @@ export const whatIBuild: { icon: string; title: string; body: string; accent: Ac
   {
     icon: 'Search',
     accent: 'data',
-    title: 'Discovery & PRDs',
-    body: 'Stakeholder interviews, customer journeys for each segment, PRDs and BRDs, and a roadmap with the deferrals written down.',
+    title: 'User needs & scope',
+    body: 'Customer conversations turned into journeys, PRDs, BRDs and user stories with acceptance criteria. MVPs cut with MoSCoW, with every deferral written down.',
   },
   {
     icon: 'Layers',
@@ -351,14 +318,14 @@ export const whatIBuild: { icon: string; title: string; body: string; accent: Ac
   {
     icon: 'ShieldCheck',
     accent: 'dotnet',
-    title: 'Money-safe systems',
-    body: 'Payments, reconciliation and synchronization where a retry must never charge twice - OAuth 2.0, JWT, RBAC, idempotency.',
+    title: 'Reliable workflows',
+    body: 'Connect product rules to implementation: payment verification, organization permissions and financial sync that handles retries safely.',
   },
   {
     icon: 'LineChart',
     accent: 'cloud',
-    title: 'Measurement',
-    body: 'Analytics events specified up front, funnel analysis, unit economics and market sizing - so the next decision has numbers behind it.',
+    title: 'Outcomes & iteration',
+    body: 'Funnel analysis from sign-up to paid filing, retention in Google Analytics and Mixpanel, A/B tests on checkout, and release calls made against acceptance criteria.',
   },
 ]
 
@@ -386,23 +353,23 @@ export const caseStudies: CaseStudy[] = [
     id: 'fylflix',
     index: '01',
     name: 'FylFlix Platform',
-    kicker: 'Production fintech & compliance platform',
+    kicker: 'Customer journeys, MVP scope and full-stack delivery',
     org: 'WFYI Technology',
-    period: 'Jan 2026 - Present',
+    period: 'Jan 2026 - Aug 2026',
     accent: 'react',
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'OAuth 2.0', 'JWT', 'Razorpay'],
     problem:
       'Customer and internal workflows had to run across four surfaces - B2C, B2B, Legal and Admin - on one auth core and one design system, with organization boundaries enforced everywhere.',
     owned: [
+      'Customer journeys for four segments',
+      'PRDs & BRDs',
+      'MVP scope & prioritization',
+      'A team of up to 10',
       'Four frontend applications',
       'Shared UI / design system',
       'Authentication & workspaces',
       'Multi-organization RBAC',
-      'B2B discovery · 100+ services',
       'Payments & subscriptions',
-      'Legal booking & messaging',
-      'Document workflows',
-      'Analytics dashboards',
     ],
     flows: [
       {
@@ -415,6 +382,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     challenges: [
+      {
+        title: 'MVP scope with explicit deferrals',
+        body: 'Built the roadmap from 100+ customer conversations, then cut the staff admin MVP to four roles with MoSCoW and deferred 13 features, each with a written condition for revisiting it.',
+      },
       {
         title: 'One auth core, four surfaces',
         body: 'A single OAuth 2.0 / JWT flow with secure callbacks and refresh-token handling, shared by every product instead of re-implemented per app.',
@@ -429,10 +400,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     impact: [
-      { value: '4', label: 'Product surfaces' },
-      { value: '100+', label: 'B2B services' },
-      { value: '1', label: 'Shared design system' },
-      { value: 'Live', label: 'Razorpay subscriptions' },
+      { value: '500+', label: 'ITR sign-ups in one season' },
+      { value: '380+', label: 'Paid filings' },
+      { value: '~25%', label: 'Checkout lift in A/B tests' },
+      { value: '180+', label: 'Service pages launched' },
     ],
     diagram: 'fylflix',
   },
@@ -498,7 +469,7 @@ export const caseStudies: CaseStudy[] = [
     name: 'RECON',
     kicker: 'Enterprise hedge-fund reconciliation platform',
     org: 'Indus Valley Partners',
-    period: 'Jul 2023 - Jan 2026',
+    period: 'Jul 2023 - Dec 2025',
     accent: 'data',
     stack: ['.NET Core', 'REST APIs', 'React', 'SQL Server', 'Database design', 'SSRS', 'SSIS'],
     problem:
@@ -508,8 +479,8 @@ export const caseStudies: CaseStudy[] = [
       'REST API layer',
       'React component library',
       'SQL schema & database design',
-      'Reconciliation workflows',
-      'Peer reviews & mentoring',
+      'Client requirements & workflows',
+      'Team delivery & mentoring',
     ],
     flows: [
       {
@@ -518,6 +489,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     challenges: [
+      {
+        title: 'From client workflows to delivery',
+        body: 'Ran requirement calls, demos and UAT with Aurelius Capital Management and wrote the user stories, then delivered the modules across SQL, .NET APIs and React.',
+      },
       {
         title: 'Modernize in place',
         body: 'Moved a live financial application to .NET Core + React while it stayed in production for clients.',
@@ -550,7 +525,7 @@ export const skills: {
   accent: Accent
   /** lucide icon name */
   icon: string
-  /** Which shipped projects this layer actually carried - taken from the roles above. */
+  /** Which projects this layer actually carried - taken from the roles above. */
   usedIn: string[]
   items: string[]
 }[] = [
@@ -558,23 +533,61 @@ export const skills: {
     group: 'Product',
     accent: 'data',
     icon: 'Compass',
-    usedIn: ['UrjaSetu Platform', 'FylFlix Platform'],
+    usedIn: ['FylFlix Platform', 'UrjaSetu BioEnergy'],
     items: [
-      'Product Discovery',
+      'Product Strategy',
+      'User Research',
       'Customer Journey Mapping',
+      'Competitive Analysis',
       'PRDs & BRDs',
-      'MVP Definition',
+      'MVP Scoping',
+      'Prioritization (MoSCoW)',
       'Roadmapping',
-      'Prioritization',
-      'User Segmentation',
+      'GTM Strategy',
       'Stakeholder Management',
+    ],
+  },
+  {
+    group: 'Delivery',
+    accent: 'react',
+    icon: 'ClipboardCheck',
+    usedIn: ['FylFlix Platform', 'RECON'],
+    items: [
+      'User Stories',
+      'Acceptance Criteria',
+      'Sprint Planning',
+      'UAT',
+      'Agile / Scrum',
+      'Client Engagement',
+      'Jira',
+      'Azure DevOps',
+      'Notion',
+      'Figma',
+    ],
+  },
+  {
+    group: 'Analytics & Business',
+    accent: 'cloud',
+    icon: 'LineChart',
+    usedIn: ['FylFlix Platform', 'UrjaSetu BioEnergy'],
+    items: [
+      'KPI Tracking',
+      'Funnel Analysis',
+      'User Retention',
+      'A/B Testing',
+      'Event Tracking',
+      'Unit Economics',
+      'Market Sizing',
+      'Monetization',
+      'Google Analytics',
+      'Mixpanel',
     ],
   },
   {
     group: 'Frontend',
     accent: 'react',
     icon: 'MonitorSmartphone',
-    usedIn: ['FylFlix Platform', 'UrjaSetu Platform', 'Aurora UI'],
+    usedIn: ['FylFlix Platform', 'UrjaSetu BioEnergy', 'Aurora UI'],
     items: [
       'React',
       'Next.js',
@@ -591,62 +604,29 @@ export const skills: {
     group: 'Backend',
     accent: 'dotnet',
     icon: 'Server',
-    usedIn: ['Tally Connector', 'RECON'],
-    items: ['C#', '.NET Core', '.NET 10', 'REST APIs', 'JSON', 'Windows Services', 'OOP', 'Microservices'],
+    usedIn: ['Tally Connector', 'RECON', 'FylFlix Platform'],
+    items: ['C#', '.NET Core', '.NET 10', 'REST APIs', 'Windows Services', 'OOP', 'Microservices', 'LLM APIs (Gemini)'],
   },
   {
     group: 'Databases & Data',
     accent: 'data',
     icon: 'Database',
     usedIn: ['Client Engagements', 'Tally Connector', 'RECON'],
-    items: [
-      'SQL',
-      'PostgreSQL',
-      'MySQL',
-      'SQLite',
-      'Database Design',
-      'Indexes',
-      'Views',
-      'SSRS',
-      'SSIS',
-      'ETL',
-    ],
-  },
-  {
-    group: 'Analytics & Business',
-    accent: 'cloud',
-    icon: 'LineChart',
-    usedIn: ['UrjaSetu Platform', 'FylFlix Platform'],
-    items: [
-      'Event Tracking',
-      'Funnel Analysis',
-      'Product Metrics',
-      'Unit Economics',
-      'Market Sizing',
-      'Monetization',
-      'Checkout & Payments',
-    ],
+    items: ['SQL', 'SQL Server', 'PostgreSQL', 'MySQL', 'SQLite', 'Database Design', 'SSRS', 'SSIS', 'ETL'],
   },
   {
     group: 'Security & Architecture',
     accent: 'cloud',
     icon: 'ShieldCheck',
     usedIn: ['FylFlix Platform', 'Tally Connector'],
-    items: [
-      'OAuth 2.0',
-      'JWT',
-      'RBAC',
-      'Idempotency',
-      'System Design',
-      'Application Architecture',
-    ],
+    items: ['OAuth 2.0', 'JWT', 'RBAC', 'Idempotency', 'System Design', 'Application Architecture'],
   },
   {
-    group: 'Testing & Delivery',
+    group: 'Testing & Tooling',
     accent: 'react',
     icon: 'FlaskConical',
     usedIn: ['Tally Connector', 'Aurora UI', 'RECON'],
-    items: ['xUnit', 'Unit Testing', 'axe-core', 'CI/CD', 'Git', 'Agile / Scrum', 'AWS S3'],
+    items: ['xUnit', 'Unit Testing', 'axe-core', 'Postman', 'CI/CD', 'Git', 'AWS S3'],
   },
 ]
 
@@ -673,6 +653,12 @@ export const marquee = [
   'Product Discovery',
   'PRDs & BRDs',
   'Roadmapping',
+  'MoSCoW',
+  'User Stories',
+  'A/B Testing',
+  'Mixpanel',
+  'Jira',
+  'Figma',
   'React',
   'Next.js',
   'TypeScript',

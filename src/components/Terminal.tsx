@@ -10,7 +10,7 @@ const LINES: Line[] = [
   { text: '{', cls: 'text-ink-3' },
   { text: '    Stack   => [".NET Core", "React", "TypeScript", "SQL"],', cls: 'text-ink-2', hang: true },
   { text: '    Shipped => "100+ services, 26 synced entities, 100+ reports",', cls: 'text-ink-2', hang: true },
-  { text: '    Cares   => "idempotency, RBAC, clean data paths",', cls: 'text-ink-2', hang: true },
+  { text: '    Cares   => "user journeys, MVP scope, reliable delivery",', cls: 'text-ink-2', hang: true },
   { text: '}', cls: 'text-ink-3' },
   { text: '', pause: 160 },
   { text: '✓ build succeeded - 0 warnings', cls: 'text-[color:var(--green-text)]' },

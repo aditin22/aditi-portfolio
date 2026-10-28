@@ -27,9 +27,10 @@ export function Band() {
               className="mt-5 max-w-[600px] text-[18px] leading-[1.6]"
               style={{ color: 'rgba(255,255,255,0.75)' }}
             >
-              Discovery with the people who will use it, requirements written down with the
-              deferrals made explicit, then the code: payment activation that charges exactly once,
-              financial sync that posts every entry exactly once. The work is in the edges.
+              At FylFlix I built the roadmap from 100+ customer conversations, then wrote much of the
+              code that shipped it: the design system, the auth core and the Razorpay checkout. At IVP
+              I ran the requirement calls and UAT with the client, then led the team that built the
+              changes in React, .NET and SQL.
             </p>
           </Reveal>
         </div>
