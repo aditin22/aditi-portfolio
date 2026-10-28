@@ -22,7 +22,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
   github: 'https://github.com/aditin22',
   summary:
-    'Engineer turned product manager, three years across fintech and legaltech. At FylFlix I owned product decisions with the founders, built the roadmap from 100+ customer conversations and led a team of up to 10, while building the React/Next.js platform, authentication and payments; it reached 500+ ITR sign-ups and 380+ paid filings in one season. At IVP I worked client-facing with Aurelius Capital and led a 3 to 4 person .NET and React re-architecture. UrjaSetu is a personal project I am building end to end to keep sharpening both skills.',
+    'Engineer turned product manager, three years across fintech and legaltech. At FylFlix I owned product decisions with the founders, built the roadmap from 100+ customer conversations and led a team of up to 10, while building the React/Next.js platform, authentication and payments; it reached 500+ ITR sign-ups and 380+ paid filings in one season. At IVP I worked client-facing with Aurelius Capital and led a 3 to 4 person .NET and React re-architecture. Currently leading UrjaSetu, a 0-to-1 client project, from discovery to launch.',
 }
 
 /** Professional outcomes only: three from the product side, three from the build. */
@@ -146,19 +146,22 @@ export const projects: Project[] = [
     id: 'urjasetu',
     index: '04',
     name: 'UrjaSetu BioEnergy',
-    kicker: 'A buyer platform for industrial biomass fuel, built end to end',
-    org: 'Personal project',
+    kicker: '0-to-1 B2B buyer platform for industrial biomass fuel',
+    org: 'Client project',
     period: 'Sep 2026 - Present',
     accent: 'data',
     hat: 'Product + build',
-    split: { product: 50, engineering: 50 },
+    split: { product: 60, engineering: 40 },
     problem:
-      'Factories across Delhi NCR buy boiler fuel over phone calls and WhatsApp, with no published specifications and no easy way to compare one supplier’s quote against another’s.',
+      'Factories across Delhi NCR buy boiler fuel over phone calls and WhatsApp, with no published specifications and no easy way to compare one supplier\u2019s quote against another\u2019s.',
     did:
-      'Defined the requirements and built the whole journey in Next.js and TypeScript: a 4-question Fuel Finder, a fuel-switch calculator and a supplier checklist that ranks quotes on delivered cost, each passing its context into one quote form, plus an admin dashboard for incoming leads.',
+      'Ran 15 to 20 days of discovery with industrial buyers and boiler operators and wrote the PRDs and BRDs, then built the buyer journey with a 2-person team: a 4-question Fuel Finder and a fuel-switch calculator that qualify leads, a supplier checklist that ranks quotes on delivered cost, and an ops dashboard for incoming enquiries.',
     happened:
-      'A working demo is live and still growing. The site never shows a number it cannot prove, so the calculator gives an energy-equivalent range with its assumptions visible instead of promising savings, and 16 tracked events behind a consent banner measure the funnel from first question to submitted quote.',
-    links: [{ label: 'Live demo', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' }],
+      'The first version is live, with go-to-market planned on IndiaMART and Google. KPIs are set around quote requests per week and measured across 16 tracked events, and the calculator gives an energy-equivalent range with its assumptions visible instead of promising savings.',
+    links: [
+      { label: 'Live site', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' },
+      { label: 'Repo is private, client work', href: '', kind: 'internal' },
+    ],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
   },
   {
