@@ -2,3 +2,6 @@ node_modules
 dist
 *.local
 .DS_Store
+
+# Output of scripts/build_resume.py; the served resume lives in public/
+scripts/*.pdf
