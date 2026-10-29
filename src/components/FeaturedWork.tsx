@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Building2, Calendar, GitBranch } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Building2, Calendar, GitBranch } from 'lucide-react'
 import { caseStudies, type CaseStudy } from '../data/resume'
 import { useDiagram } from '../store/diagram'
 import { FlowChain } from './FlowChain'
@@ -7,7 +7,7 @@ import { ProjectGlyph } from './ProjectGlyph'
 import { Reveal } from './Reveal'
 import { SectionHead } from './SectionHead'
 
-const HUES: Record<string, string> = { fylflix: 'tile-sky', tally: 'tile-lilac', recon: 'tile-mint' }
+const HUES: Record<string, string> = { fylflix: 'tile-sky', tally: 'tile-lilac', recon: 'tile-mint', urjasetu: 'tile-sand' }
 
 function Study({ cs }: { cs: CaseStudy }) {
   const openDiagram = useDiagram((s) => s.open)
@@ -66,6 +66,27 @@ function Study({ cs }: { cs: CaseStudy }) {
           <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">Problem</h4>
           <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{cs.problem}</p>
 
+          <h4 className="mt-6 font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">Goal</h4>
+          <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{cs.goal}</p>
+
+          {cs.research && (
+            <>
+              <h4 className="mt-6 font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">Research</h4>
+              <ul className="mt-2.5 space-y-1.5">
+                {cs.research.map((r) => (
+                  <li key={r} className="flex items-start gap-2 text-[13.5px] text-ink-2">
+                    <span
+                      className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                      style={{ background: `var(--${cs.accent})` }}
+                      aria-hidden="true"
+                    />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
           <h4 className="mt-6 font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">
             What I owned
           </h4>
@@ -85,7 +106,7 @@ function Study({ cs }: { cs: CaseStudy }) {
 
         <div>
           <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">
-            Decisions & implementation
+            Decisions & trade-offs
           </h4>
           <ul className="mt-2.5 space-y-3.5">
             {cs.challenges.map((c) => (
@@ -105,6 +126,18 @@ function Study({ cs }: { cs: CaseStudy }) {
         ))}
       </div>
 
+      {/* ── Learnings, once written ────────────────────────────────────── */}
+      {cs.learnings && cs.learnings.length > 0 && (
+        <div className="mt-7 border-t border-line pt-7">
+          <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[1.3px] text-ink-4">What I would do differently</h4>
+          <ul className="mt-2.5 space-y-1.5">
+            {cs.learnings.map((l) => (
+              <li key={l} className="text-[14px] leading-relaxed text-ink-2">{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* ── Impact + diagram link ──────────────────────────────────────── */}
       <div className="mt-7 flex flex-wrap items-end justify-between gap-5 border-t border-line pt-7">
         <dl className="grid grid-cols-2 gap-x-8 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-10">
@@ -120,6 +153,13 @@ function Study({ cs }: { cs: CaseStudy }) {
             </div>
           ))}
         </dl>
+
+        {cs.live && !cs.diagram && (
+          <a href={cs.live} target="_blank" rel="noreferrer noopener" className="btn-primary group !py-2.5">
+            Open the live site
+            <ArrowUpRight size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        )}
 
         {cs.diagram && (
           <a
@@ -143,9 +183,9 @@ export function FeaturedWork() {
       <div className="mx-auto max-w-shell px-6 py-16 md:py-[68px]">
         <SectionHead
           eyebrow="Product & engineering deep dives"
-          title="Three of them,"
+          title="Four of them,"
           accent="taken apart."
-          blurb="How user workflows shaped scope, how product rules became technical decisions, and what I delivered across the interface, services and data."
+          blurb="Each one in the same order: the problem, the goal, how I learned what users needed, the decisions and trade-offs, and what it moved."
         />
         <div className="space-y-6">
           {caseStudies.map((cs, i) => (

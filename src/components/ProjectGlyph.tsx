@@ -176,6 +176,53 @@ export function ProjectGlyph({ id, accent }: { id: string; accent: Accent }) {
     )
   }
 
+  if (id === 'urjasetu') {
+    // Four questions narrowing a wide field of fuels to one qualified quote.
+    const qs = [18, 38, 58, 78]
+    return (
+      <svg {...common}>
+        {qs.map((y, i) => (
+          <motion.circle
+            key={y}
+            cx="22"
+            cy={y}
+            r="6"
+            fill={soft}
+            stroke={c}
+            strokeWidth="1.5"
+            initial={{ opacity: 0.3 }}
+            animate={reduced ? { opacity: 1 } : { opacity: [0.3, 1, 1, 0.3] }}
+            transition={{ duration: 3.6, delay: i * 0.3, ease: EASE, ...loop }}
+          />
+        ))}
+        <path d="M34,18 C90,18 100,48 132,48 M34,38 C90,38 100,48 132,48 M34,58 C90,58 100,48 132,48 M34,78 C90,78 100,48 132,48" stroke="var(--border-mid)" strokeWidth="1.5" fill="none" />
+        <motion.path
+          d="M132,48 L168,48"
+          stroke={c}
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={reduced ? { pathLength: 1 } : { pathLength: [0, 0, 1, 1, 0] }}
+          transition={{ duration: 3.6, times: [0, 0.35, 0.55, 0.9, 1], ease: EASE, ...loop }}
+        />
+        <rect x="170" y="22" width="60" height="52" rx="7" fill="var(--bg-surface2)" stroke={c} strokeWidth="1.5" />
+        <rect x="180" y="34" width="40" height="6" rx="3" fill={soft} />
+        <rect x="180" y="46" width="28" height="6" rx="3" fill={soft} />
+        <motion.rect
+          x="180"
+          y="58"
+          width="24"
+          height="8"
+          rx="4"
+          fill={c}
+          initial={{ opacity: 0 }}
+          animate={reduced ? { opacity: 1 } : { opacity: [0, 0, 1, 1, 0] }}
+          transition={{ duration: 3.6, times: [0, 0.55, 0.65, 0.9, 1], ease: EASE, ...loop }}
+        />
+      </svg>
+    )
+  }
+
   // clients - a report estate building itself
   const bars = [
     { x: 14, h: 30 },

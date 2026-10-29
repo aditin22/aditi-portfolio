@@ -9,7 +9,7 @@ import { Band } from './components/Band'
 import { Stats } from './components/Stats'
 import { FeaturedWork } from './components/FeaturedWork'
 import { Projects } from './components/Projects'
-import { WhatIBuild } from './components/WhatIBuild'
+import { HowIWork } from './components/HowIWork'
 import { Skills } from './components/Skills'
 import { TopBar } from './components/TopBar'
 
@@ -45,7 +45,7 @@ export default function App() {
       <main>
         <Hero />
         <Stats />
-        <WhatIBuild />
+        <HowIWork />
         <Projects />
         <Experience />
         <Impact />

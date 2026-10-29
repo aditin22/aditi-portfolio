@@ -7,7 +7,15 @@ export const profile = {
   /** The two halves, named. Rendered as the hero's stack rail. */
   tagline: ['Discovery & PRDs', 'Roadmap', 'React / Next.js', 'C# / .NET', 'SQL'],
   positioning:
-    'Three years across fintech and legaltech, on both sides of the product. I run customer conversations, write the PRDs and own the roadmap, and I build in React, Next.js, C# and SQL.',
+    'Three years across fintech and legaltech, from customer discovery to production code in React, Next.js, C# and SQL.',
+  /** Cycled under the hero headline, one verb of the job at a time. */
+  rotator: [
+    'talk to the customers.',
+    'write the PRD.',
+    'cut the MVP.',
+    'build it in React and .NET.',
+    'measure what shipped.',
+  ],
   years: 3,
   /** Served from public/; resolved against the Vite base at render time. */
   resumeFile: 'Aditi_Navhal_Resume.pdf',
@@ -160,6 +168,7 @@ export const projects: Project[] = [
       'The first version is live, with go-to-market planned on IndiaMART and Google. KPIs are set around quote requests per week and measured across 16 tracked events, and the calculator gives an energy-equivalent range with its assumptions visible instead of promising savings.',
     links: [
       { label: 'Live site', href: 'https://urjasetu-alpha.vercel.app', kind: 'demo' },
+      { label: 'Case study', href: '#case-urjasetu', kind: 'case' },
       { label: 'Repo is private, client work', href: '', kind: 'internal' },
     ],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
@@ -304,31 +313,31 @@ export const experience: Role[] = [
   },
 ]
 
-/** The four things I actually do, in the order they happen on a project. */
-export const whatIBuild: { icon: string; title: string; body: string; accent: Accent }[] = [
+/** How I work: the same four steps on every project, each with where it happened. */
+export const approach: { title: string; body: string; proof: string; accent: Accent }[] = [
   {
-    icon: 'Search',
+    title: 'Discover',
     accent: 'data',
-    title: 'User needs & scope',
-    body: 'Customer conversations turned into journeys, PRDs, BRDs and user stories with acceptance criteria. MVPs cut with MoSCoW, with every deferral written down.',
+    body: 'Talk to the people who will use it before a line of the PRD is written.',
+    proof: '100+ customer conversations at FylFlix. 15 to 20 days with buyers and boiler operators for UrjaSetu. Requirement calls and root-cause analysis with Aurelius Capital at IVP.',
   },
   {
-    icon: 'Layers',
-    accent: 'react',
-    title: 'Full-stack build',
-    body: 'React and Next.js front ends on a shared design system, backed by C#/.NET services and relational databases.',
-  },
-  {
-    icon: 'ShieldCheck',
-    accent: 'dotnet',
-    title: 'Reliable workflows',
-    body: 'Connect product rules to implementation: payment verification, organization permissions and financial sync that handles retries safely.',
-  },
-  {
-    icon: 'LineChart',
+    title: 'Decide',
     accent: 'cloud',
-    title: 'Outcomes & iteration',
-    body: 'Funnel analysis from sign-up to paid filing, retention in Google Analytics and Mixpanel, A/B tests on checkout, and release calls made against acceptance criteria.',
+    body: 'Write the PRD, cut the MVP, and write down what was deferred and what would bring it back.',
+    proof: 'MoSCoW cut the FylFlix staff admin MVP to 4 roles, with 13 features deferred behind revisit triggers. WhatsApp chosen over a portal for invoice collection.',
+  },
+  {
+    title: 'Build',
+    accent: 'react',
+    body: 'Build it with the team, in React, Next.js, C# and SQL, and own the release call.',
+    proof: 'The FylFlix design system, auth core and Razorpay checkout. The Tally Connector in .NET 10. The RECON re-architecture with a 3 to 4 person team.',
+  },
+  {
+    title: 'Measure',
+    accent: 'dotnet',
+    body: 'Instrument it before launch, so the next decision has numbers behind it.',
+    proof: 'About a 25% checkout lift from A/B tests. Funnel and retention tracked in Google Analytics and Mixpanel. 16 tracked events on UrjaSetu.',
   },
 ]
 
@@ -342,6 +351,10 @@ export type CaseStudy = {
   accent: Accent
   stack: string[]
   problem: string
+  /** What success looked like, before any of it was built. */
+  goal: string
+  /** How the needs were learned. Omitted where there was no discovery of note. */
+  research?: string[]
   owned: string[]
   /** Horizontal step chains - the architecture the audit asked to see. */
   flows: { title: string; steps: string[] }[]
@@ -349,6 +362,10 @@ export type CaseStudy = {
   impact: { value: string; label: string }[]
   /** Which interactive diagram in the Architecture section to open. */
   diagram?: 'tally' | 'fylflix'
+  /** Live product, where there is one to open. */
+  live?: string
+  /** What I would do differently. Rendered only once written. */
+  learnings?: string[]
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -363,6 +380,12 @@ export const caseStudies: CaseStudy[] = [
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'OAuth 2.0', 'JWT', 'Razorpay'],
     problem:
       'Customer and internal workflows had to run across four surfaces - B2C, B2B, Legal and Admin - on one auth core and one design system, with organization boundaries enforced everywhere.',
+    goal: 'Let four customer segments buy both fixed-price services and custom, multi-stage legal work on one platform, and let the team add new services without an engineer.',
+    research: [
+      '100+ customer conversations behind the roadmap',
+      'Founders, CAs and lawyers aligned on the trade-offs',
+      'Funnel from sign-up to paid filing, and retention, in Google Analytics and Mixpanel',
+    ],
     owned: [
       'Customer journeys for four segments',
       'PRDs & BRDs',
@@ -421,6 +444,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ['C#', '.NET 10', 'Windows Service', 'SQLite', 'PostgreSQL', 'AWS S3', 'OAuth 2.0', 'xUnit', 'Serilog'],
     problem:
       'On-premise TallyPrime data had to reach cloud workflows reliably - 26 entity types, over connectivity that drops, without ever posting a financial entry twice.',
+    goal: 'Get every TallyPrime change into cloud workflows, even through an outage, with a retry that can never charge the books twice.',
     owned: [
       '.NET 10 Windows Service',
       'SQLite-backed local processing',
@@ -477,6 +501,12 @@ export const caseStudies: CaseStudy[] = [
     stack: ['.NET Core', 'REST APIs', 'React', 'SQL Server', 'Database design', 'SSRS', 'SSIS'],
     problem:
       'A legacy .NET Framework reconciliation platform that hedge funds close their books on had to be modernized - without disrupting the clients running on it.',
+    goal: 'Move the platform to .NET Core and React while it stayed in production, and ship faster afterwards than before.',
+    research: [
+      'Requirement calls and demos with Aurelius Capital Management',
+      'Root-cause analysis on data breaks',
+      'UAT against acceptance criteria before each release',
+    ],
     owned: [
       '.NET Framework → .NET Core migration',
       'REST API layer',
@@ -519,6 +549,64 @@ export const caseStudies: CaseStudy[] = [
       { value: '10+', label: 'Production releases' },
       { value: '100+', label: 'Reports automated' },
     ],
+  },
+  {
+    id: 'urjasetu',
+    index: '04',
+    name: 'UrjaSetu BioEnergy',
+    kicker: '0-to-1 buyer platform for industrial biomass fuel',
+    org: 'Client project',
+    period: 'Sep 2026 - Present',
+    accent: 'data',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    problem:
+      'Factories across Delhi NCR buy boiler fuel over phone calls and WhatsApp, with no published specifications and no easy way to compare one supplier\u2019s quote against another\u2019s.',
+    goal: 'Turn an offline, call-and-WhatsApp purchase into one digital journey that ends in a qualified quote request.',
+    research: [
+      '15 to 20 days of discovery with industrial buyers and boiler operators',
+      'Market-sizing and unit-economics models to inform pricing',
+      'PRDs and BRDs written from what discovery found',
+    ],
+    owned: [
+      'Discovery, PRDs & BRDs',
+      'Buyer journey design',
+      'KPIs & analytics plan',
+      'Go-to-market plan',
+      'Fuel Finder & calculator',
+      'Supplier checklist',
+      'Ops dashboard',
+      'Next.js build',
+    ],
+    flows: [
+      {
+        title: 'Buyer journey',
+        steps: ['Fuel Finder', 'Fuel calculator', 'Supplier checklist', 'Prefilled quote', 'Ops dashboard'],
+      },
+    ],
+    challenges: [
+      {
+        title: 'Numbers a buyer can trust',
+        body: 'The site never shows a number it cannot prove. The calculator gives an energy-equivalent range with every assumption visible, rather than a savings figure nobody has verified.',
+      },
+      {
+        title: 'Every entry point carries its context',
+        body: 'The Fuel Finder, the calculator and each delivery-area check pass their answers into the quote form, so an enquiry arrives already qualified.',
+      },
+      {
+        title: 'Built for how buyers read',
+        body: 'Every page can read itself aloud in English or Hindi, highlighting the section it is explaining, with captions where a device has no voice.',
+      },
+      {
+        title: 'Measured from day one',
+        body: 'KPIs set around quote requests per week, tracked across 16 events behind a consent banner, from the first question to a submitted quote.',
+      },
+    ],
+    impact: [
+      { value: '15 to 20', label: 'Days of buyer discovery' },
+      { value: '16', label: 'Tracked funnel events' },
+      { value: 'Live', label: 'First version' },
+    ],
+    live: 'https://urjasetu-alpha.vercel.app',
   },
 ]
 

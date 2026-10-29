@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Download, Github, Linkedin } from 'lucide-react'
 import { marquee, profile } from '../data/resume'
@@ -7,6 +8,70 @@ import { ParticleField } from './ParticleField'
 const rise = {
   hidden: { opacity: 0, y: 22 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
+}
+
+/** Headline words rise one at a time: 20px up and in, 80ms apart. */
+const word = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
+}
+
+function Words({ text }: { text: string }) {
+  const parts = text.split(' ')
+  return (
+    <>
+      {parts.map((w, i) => (
+        <span key={i}>
+          <motion.span variants={word} className="inline-block">
+            {w}
+          </motion.span>
+          {i < parts.length - 1 ? ' ' : ''}
+        </span>
+      ))}
+    </>
+  )
+}
+
+/**
+ * "I" followed by one verb of the job at a time. Every phrase sits in the same
+ * grid cell, so the cell is as wide as the longest one and the line never
+ * jumps as they swap; only opacity and transform change. Reduced motion gets
+ * the whole sentence, still.
+ */
+function Rotator({ phrases }: { phrases: string[] }) {
+  const reduced = useReducedMotion()
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    if (reduced) return
+    const t = window.setInterval(() => setI((v) => (v + 1) % phrases.length), 2200)
+    return () => window.clearInterval(t)
+  }, [reduced, phrases.length])
+
+  const sentence = `I ${phrases.slice(0, -1).map((p) => p.replace(/\.$/, '')).join(', ')} and ${phrases[phrases.length - 1]}`
+  if (reduced) return <>{sentence}</>
+
+  const prev = (i - 1 + phrases.length) % phrases.length
+  return (
+    <>
+      <span className="sr-only">{sentence}</span>
+      <span aria-hidden="true" className="inline-flex max-w-full gap-[0.28em] text-left">
+        <span>I</span>
+        <span className="inline-grid min-w-0">
+          {phrases.map((p, k) => (
+            <motion.span
+              key={p}
+              className="col-start-1 row-start-1 text-white"
+              initial={false}
+              animate={{ opacity: k === i ? 1 : 0, y: k === i ? 0 : k === prev ? -14 : 14 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {p}
+            </motion.span>
+          ))}
+        </span>
+      </span>
+    </>
+  )
 }
 
 /**
@@ -42,10 +107,25 @@ export function Hero() {
             Open to opportunities
           </motion.span>
 
-          <motion.h1 variants={rise} className="t-h1 text-white">
-            <span className="block">{profile.name}</span>
-            <span className="t-acc block">{profile.role}.</span>
+          <motion.h1
+            variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+            className="t-h1 text-white"
+          >
+            <span className="block">
+              <Words text={profile.name} />
+            </span>
+            <span className="t-acc block">
+              <Words text={`${profile.role}.`} />
+            </span>
           </motion.h1>
+
+          <motion.p
+            variants={rise}
+            className="mt-4 font-display text-[18px] font-bold tracking-[-0.3px] md:text-[22px]"
+            style={{ color: 'rgba(255,255,255,0.7)' }}
+          >
+            <Rotator phrases={profile.rotator} />
+          </motion.p>
 
           <motion.ul
             variants={rise}
