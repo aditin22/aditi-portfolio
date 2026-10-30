@@ -3,7 +3,7 @@ export type Accent = 'react' | 'dotnet' | 'data' | 'cloud'
 export const profile = {
   name: 'Aditi Navhal',
   /** Non-breaking hyphen (U+2011): stops the hero headline breaking after "Full-". */
-  role: 'Product Manager & Full‑Stack Engineer',
+  role: 'Software Engineer with Product Ownership',
   /** The two halves, named. Rendered as the hero's stack rail. */
   tagline: ['Discovery & PRDs', 'Roadmap', 'React / Next.js', 'C# / .NET', 'SQL'],
   positioning:
@@ -27,10 +27,10 @@ export const profile = {
     'https://mail.google.com/mail/?view=cm&fs=1&to=aditinavhal01%40gmail.com&su=' +
     encodeURIComponent('Hello Aditi - via your portfolio'),
   phone: '+91-8769589069',
-  linkedin: 'https://www.linkedin.com/in/aditi-navhal-952b57193/',
+  linkedin: 'https://www.linkedin.com/in/aditinavhal/',
   github: 'https://github.com/aditin22',
   summary:
-    'Engineer turned product manager, three years across fintech and legaltech. At FylFlix I owned product decisions with the founders, built the roadmap from 100+ customer conversations and led a team of up to 10, while building the React/Next.js platform, authentication and payments; it reached 500+ ITR sign-ups and 380+ paid filings in one season. At IVP I worked client-facing with Aurelius Capital and led a 3 to 4 person .NET and React re-architecture. Currently leading UrjaSetu, a 0-to-1 client project, from discovery to launch.',
+    'Software engineer with product ownership, three years across fintech and legaltech. At FylFlix I owned product decisions with the founders, built the roadmap from 100+ customer conversations and led a team of up to 10, while building the React/Next.js platform, authentication and payments; it reached 500+ ITR sign-ups and 380+ paid filings in one season. At IVP I worked client-facing with Aurelius Capital and led a 3 to 4 person .NET and React re-architecture. Currently leading UrjaSetu, a 0-to-1 client project, from discovery to launch.',
 }
 
 /** Professional outcomes only: three from the product side, three from the build. */
@@ -143,7 +143,7 @@ export const projects: Project[] = [
     did:
       'Ran requirement calls, demos, UAT and root-cause analysis on data breaks with Aurelius Capital Management, and wrote the user stories with acceptance criteria. As lead of a 3 to 4 person team, took the platform to .NET Core with a React front end and decided when each release was ready for production.',
     happened:
-      '30% performance gain, 25% faster releases and 10+ production features. Alongside it, 100+ SSRS financial and compliance reports automated for PwC, Carronade and Aurelius, with a key workflow cut from about 6 hours to 2.',
+      '25% faster releases and 10+ production features. Alongside it, 100+ SSRS financial and compliance reports automated for PwC, Carronade and Aurelius, cutting report runtime by 30% and a key workflow from about 6 hours to 2.',
     links: [
       { label: 'Case study', href: '#case-recon', kind: 'case' },
       { label: 'Enterprise product, no public repo', href: '', kind: 'internal' },
@@ -283,7 +283,6 @@ export const experience: Role[] = [
         subtitle: 'Hedge Fund Reconciliation Platform',
         accent: 'dotnet',
         metrics: [
-          { value: '+30%', label: 'performance' },
           { value: '25%', label: 'faster releases' },
           { value: '10+', label: 'feature releases' },
         ],
@@ -544,7 +543,6 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     impact: [
-      { value: '+30%', label: 'Performance' },
       { value: '25%', label: 'Faster release cycles' },
       { value: '10+', label: 'Production releases' },
       { value: '100+', label: 'Reports automated' },
@@ -734,7 +732,7 @@ export const education = {
 
 /** Everything outside the code - kept as icon + short label, no prose. */
 export const highlights: { icon: string; label: string; detail: string }[] = [
-  { icon: 'Users', label: 'Led 5-7 people', detail: 'Cross-functional, FylFlix' },
+  { icon: 'Users', label: 'Led a team of up to 10', detail: 'Cross-functional, FylFlix' },
   { icon: 'Palette', label: 'Head of Atrangi', detail: 'Art Committee, NMIMS' },
   { icon: 'Mic', label: 'Ambiora & YSF', detail: 'Tech Fest - Youth Speaking Forum' },
   { icon: 'Trophy', label: 'State level', detail: 'Badminton' },

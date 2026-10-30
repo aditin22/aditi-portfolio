@@ -7,7 +7,7 @@ const TILES = [
   {
     kind: 'bars' as const,
     hue: 'tile-lilac',
-    title: 'RECON modernization',
+    title: 'RECON release cycle',
     note: '.NET Framework → .NET Core + React',
   },
   {
@@ -54,7 +54,7 @@ export function Impact() {
                 <BarPair
                   accent="dotnet"
                   a={{ label: 'Legacy', value: 100, caption: '100%' }}
-                  b={{ label: 'Rebuilt', value: 70, caption: '−30%' }}
+                  b={{ label: 'Rebuilt', value: 75, caption: '−25%' }}
                 />
               )}
               {t.kind === 'rails' && (

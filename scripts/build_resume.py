@@ -41,7 +41,7 @@ def paragraphs(raw):
 add('Aditi Navhal','name')
 add('Product Management & Full-Stack Engineering | React / Next.js | C# / .NET | SQL')
 add('Delhi NCR, India | aditinavhal01@gmail.com | +91-8769589069')
-story.append(Paragraph('<link href="https://www.linkedin.com/in/aditi-navhal-952b57193/">LinkedIn</link> | <link href="https://aditin22.github.io/aditi-portfolio/">Portfolio</link>',styles['body']))
+story.append(Paragraph('<link href="https://www.linkedin.com/in/aditinavhal/">LinkedIn</link> | <link href="https://aditin22.github.io/aditi-portfolio/">Portfolio</link>',styles['body']))
 add('Summary','heading')
 add('Three years across fintech and legaltech, combining software engineering with product ownership at FylFlix. Defined customer journeys, PRDs and BRDs, scoped MVPs and coordinated cross-functional delivery while building React/Next.js applications, payments and authentication. At IVP, translated enterprise client workflows into requirements and delivered .NET, React and SQL improvements. Seeking product management or full-stack development roles.')
 add('Professional Experience','heading')
