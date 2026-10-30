@@ -39,7 +39,7 @@ def paragraphs(raw):
   part = part.replace('Client-facing with Aurelius Capital Management on enterprise reconciliation workflows, translating business requirements and operational issues into product improvements, with delivery for PwC and Carronade Capital.', 'Worked with Aurelius Capital Management to translate reconciliation workflows and operational issues into requirements and product improvements; also delivered reporting solutions for PwC and Carronade Capital.')
   add(part,'bullet' if part.startswith('•') else 'role' if part.startswith('Software Engineer') else 'body')
 add('Aditi Navhal','name')
-add('Product Management & Full-Stack Engineering | React / Next.js | C# / .NET | SQL')
+add('Software Engineer with Product Ownership | React / Next.js | C# / .NET | SQL')
 add('Delhi NCR, India | aditinavhal01@gmail.com | +91-8769589069')
 story.append(Paragraph('<link href="https://www.linkedin.com/in/aditinavhal/">LinkedIn</link> | <link href="https://aditin22.github.io/aditi-portfolio/">Portfolio</link>',styles['body']))
 add('Summary','heading')
